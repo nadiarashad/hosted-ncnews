@@ -6,6 +6,8 @@ import { Router } from '@reach/router';
 import Nav from './components/nav';
 import AllArticles from './components/AllArticles'
 import Article from './components/Article'
+import Comments from './components/Comments'
+import Topics from './components/Topics'
 // import Footer from './components/Footer'
 
 
@@ -23,6 +25,8 @@ function App() {
         <Home path="/" />
         <AllArticles path="/articles/" />
         <Article path="/articles/:article_id" />
+        <Comments path="/articles/:article_id/comments" />
+        <Topics path="/topics" />
       </Router>
     </div>
   );
