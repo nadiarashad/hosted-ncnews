@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { Link, Router } from '@reach/router';
+import ArticleComments from './ArticleComments'
 
 
 class Article extends Component {
 
     state = {
         article: {},
-        isLoading: true
+        isLoading: true,
+        comments: []
     }
 
     fetchArticle = () => {
@@ -15,23 +18,21 @@ class Article extends Component {
 
 
 
-
-
     componentDidMount() {
-        console.log('mounted')
+        // console.log('mounted')
         this.fetchArticle().then(res => {
             this.setState({ article: res.data.article, isLoading: false });
         });
     };
 
     IncreaseVote = () => {
-        console.log('hello')
+        // console.log('hello')
         return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`, { inc_votes: 1 })
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('in component did update')
-        console.log(prevState, 'prevState')
+        // console.log('in component did update')
+        // console.log(prevState, 'prevState')
         if (prevState.votes !== this.state.votes) {
             this.fetchArticle().then(res => {
                 this.setState({ article: res.data.article, isLoading: false });
@@ -41,8 +42,8 @@ class Article extends Component {
 
 
     render() {
-        console.log(this.state, 'state')
-        // console.log(this.props, 'props')
+        // console.log(this.state, 'state')
+        // console.log(this.props, 'article props')
 
         const { isLoading, article } = this.state
 
@@ -52,7 +53,9 @@ class Article extends Component {
 
         return (
             <div>
-
+                <Router>
+                    < ArticleComments path='/comments' />
+                </Router>
                 <ul>
                     <h3>{article.title}</h3>
                     <p>
@@ -64,14 +67,13 @@ class Article extends Component {
 
 
                         <br></br><br></br>
-                        Comments: {article.comment_count}<br></br><br></br>
-
-
+                        Comments: {article.comment_count}<br></br>
+                        <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
                     </p>
+
                 </ul>
 
-
-            </div>
+            </div >
         );
     }
 }

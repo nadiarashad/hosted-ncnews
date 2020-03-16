@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import styles from './AllArticles.module.css';
+// import styles from './AllArticles.module.css';
 // import Votes from './votes'
 // import Article from './Article';
 import { Link, Router } from '@reach/router';
-import SortArticles from './SortArticles'
+import SortArticles from './SortArticles';
+import ArticleComments from './ArticleComments'
 
 
 class AllArticles extends Component {
@@ -54,6 +55,7 @@ class AllArticles extends Component {
         const { articles, isLoading } = this.state
 
         // console.log(this.state, 'state: articles')
+        console.log(this.props, 'allarticlesprops')
         if (isLoading === true) {
             return <p>Is Loading ...</p>;
         }
@@ -80,18 +82,19 @@ class AllArticles extends Component {
                                     Created: {article.created_at}<br></br><br></br>
                                     Current votes: {article.votes}<br></br>
                                     Comment count: {article.comment_count}
+                                    <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
+
                                 </p>
-
                             </li>
-
-
-
                         )
                     })}
 
 
                 </ul>
 
+                <Router>
+                    < ArticleComments path='/comments' GetArticleComments={this.props.GetArticleComments} />
+                </Router>
 
             </div>
         );
