@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Axios from 'axios'
 import CommentForm from './CommentForm'
 
+//need to add delete comment - only if jessjelly is the logged in user
+
 class ArticleComments extends Component {
 
     state = {
@@ -13,9 +15,10 @@ class ArticleComments extends Component {
 
     postComment = newComment => {
         console.log(newComment, 'newComment')
+        const { username, body } = newComment
         return Axios.post(
             `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
-            newComment)
+            { username, body })
             .then(res => {
                 console.log(res, 'post res')
                 // this.setState(currentState => {
@@ -62,7 +65,7 @@ class ArticleComments extends Component {
 
     render() {
         // console.log('rendering')
-        // console.log(this.state, 'comments state')
+        console.log(this.state, 'comments state')
         // console.log(this.props, 'comments props')
 
         const { comments, isLoading, voteChange } = this.state
@@ -73,7 +76,6 @@ class ArticleComments extends Component {
         return (
             <div>
                 < CommentForm postComment={this.postComment} />
-
 
                 <ul>
                     {comments.map(comment => {

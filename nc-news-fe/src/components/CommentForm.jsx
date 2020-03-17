@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 
+//add comment only if logged in user is jessjelly
+
 class AddComment extends Component {
     state = {
         username: '',
-        body: ''
+        body: '',
+
     };
 
     handleInput = (field, input) => {
-        console.log(field, input, 'field and input');
+        // console.log(field, input, 'field and input');
         this.setState({ [field]: input });
     };
 
     handleSubmit = event => {
+        console.log('handlingsubmit')
+        console.log(this.props)
         event.preventDefault();
 
         const { postComment } = this.props;
@@ -21,6 +26,9 @@ class AddComment extends Component {
     };
 
     render() {
+        console.log(this.state, 'state of commentform')
+
+
         return (
             <div>
                 <h2>Have something to say? Add a comment here!</h2>

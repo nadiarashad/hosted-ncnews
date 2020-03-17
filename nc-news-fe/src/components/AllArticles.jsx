@@ -6,7 +6,12 @@ import Axios from 'axios';
 import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
 
-
+/* 
+need to add sort by: 
+date created
+comment_count
+votes
+*/
 
 class AllArticles extends Component {
 
