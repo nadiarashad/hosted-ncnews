@@ -13,6 +13,10 @@ class Article extends Component {
         voteChange: 0
     }
 
+
+
+
+
     fetchArticle = () => {
         return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`)
     }

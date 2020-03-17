@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
+import CommentForm from './CommentForm'
 
 class ArticleComments extends Component {
 
@@ -9,6 +10,23 @@ class ArticleComments extends Component {
         voteChange: 0,
         hasError: false
     }
+
+    postComment = newComment => {
+        console.log(newComment, 'newComment')
+        return Axios.post(
+            `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
+            newComment)
+            .then(res => {
+                console.log(res, 'post res')
+                // this.setState(currentState => {
+                //     return { comments: [res.data.comment, ...currentState.comments] };
+                // });
+            })
+            .catch((err) => {
+                this.setState({ hasError: err, isLoading: false })
+            })
+    };
+
 
     fetchCommentsPerID = () => {
         console.log('fetchCommentsPerID')
@@ -54,6 +72,9 @@ class ArticleComments extends Component {
         }
         return (
             <div>
+                < CommentForm postComment={this.postComment} />
+
+
                 <ul>
                     {comments.map(comment => {
                         return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Link, Router } from '@reach/router';
+import { Link } from '@reach/router';
 
 class Topics extends Component {
 

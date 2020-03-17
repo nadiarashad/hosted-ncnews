@@ -3,9 +3,9 @@ import Axios from 'axios';
 // import styles from './AllArticles.module.css';
 // import Votes from './votes'
 // import Article from './Article';
-import { Link, Router } from '@reach/router';
+import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
-import GetArticleComments from './ArticleComments'
+
 
 
 class AllArticles extends Component {
@@ -52,7 +52,7 @@ class AllArticles extends Component {
 
     render() {
 
-        const { articles, isLoading, article } = this.state
+        const { articles, isLoading } = this.state
 
         // console.log(this.state, 'state: articles')
         // console.log(this.props, 'allarticlesprops')
