@@ -5,14 +5,14 @@ import Axios from 'axios';
 // import Article from './Article';
 import { Link, Router } from '@reach/router';
 import SortArticles from './SortArticles';
-import ArticleComments from './ArticleComments'
+import GetArticleComments from './ArticleComments'
 
 
 class AllArticles extends Component {
 
     state = {
         articles: [],
-        isLoading: true
+        isLoading: true,
     }
 
     fetchAllArticles = () => {
@@ -52,10 +52,10 @@ class AllArticles extends Component {
 
     render() {
 
-        const { articles, isLoading } = this.state
+        const { articles, isLoading, article } = this.state
 
         // console.log(this.state, 'state: articles')
-        console.log(this.props, 'allarticlesprops')
+        // console.log(this.props, 'allarticlesprops')
         if (isLoading === true) {
             return <p>Is Loading ...</p>;
         }
@@ -82,7 +82,6 @@ class AllArticles extends Component {
                                     Created: {article.created_at}<br></br><br></br>
                                     Current votes: {article.votes}<br></br>
                                     Comment count: {article.comment_count}
-                                    <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
 
                                 </p>
                             </li>
@@ -92,9 +91,7 @@ class AllArticles extends Component {
 
                 </ul>
 
-                <Router>
-                    < ArticleComments path='/comments' GetArticleComments={this.props.GetArticleComments} />
-                </Router>
+
 
             </div>
         );

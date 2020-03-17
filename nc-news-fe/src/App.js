@@ -9,6 +9,8 @@ import Article from './components/Article'
 import ArticleComments from './components/ArticleComments'
 import Topics from './components/Topics'
 // import Footer from './components/Footer'
+// import AllComments from './components/AllComments'
+import ErrorPage from './components/ErrorPage'
 
 
 
@@ -25,8 +27,10 @@ function App() {
         <Home path="/" />
         <AllArticles path="/articles/" />
         <Article path="/articles/:article_id/*" />
-        {/* <Comments path="/articles/:article_id/comments" /> */}
+        <ArticleComments path="/articles/:article_id/comments" />
         <Topics path="/topics" />
+        {/* <AllComments path="/comments" /> */}
+        <ErrorPage default status={404} msg={'Page not found'} />
       </Router>
     </div>
   );
