@@ -10,7 +10,8 @@ class ArticleComments extends Component {
         comments: [],
         isLoading: true,
         voteChange: 0,
-        hasError: false
+        hasError: false,
+        voteError: false
     }
 
     postComment = newComment => {
@@ -21,9 +22,9 @@ class ArticleComments extends Component {
             { username, body })
             .then(res => {
                 console.log(res, 'post res')
-                // this.setState(currentState => {
-                //     return { comments: [res.data.comment, ...currentState.comments] };
-                // });
+                this.setState(currentState => {
+                    return { comments: [res.data.comment, ...currentState.comments] };
+                });
             })
             .catch((err) => {
                 this.setState({ hasError: err, isLoading: false })
@@ -32,15 +33,15 @@ class ArticleComments extends Component {
 
 
     fetchCommentsPerID = () => {
-        console.log('fetchCommentsPerID')
+        // console.log('fetchCommentsPerID')
         return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`)
     }
 
     componentDidMount() {
-        console.log('in did update')
+        // console.log('in did update')
         this.fetchCommentsPerID()
             .then(res => {
-                console.log(res, 'res')
+                // console.log(res, 'res')
                 this.setState({ comments: res.data.comments, isLoading: false });
             })
             .catch((err) => {
@@ -51,24 +52,42 @@ class ArticleComments extends Component {
 
     handleVoteUpdates = (num) => {
         // console.log('in handle votes')
-        return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`, { inc_votes: num })
+        return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/`, { inc_votes: num })
             .then(res => {
-                console.log(res, 'handlevote res')
+                // console.log(res, 'handlevote res')
                 this.setState(prevState => {
                     return {
                         voteChange: prevState.voteChange + num
                     };
                 });
+            }).catch((err) => {
+                this.setState({ voteError: err, isLoading: false })
+            })
+    }
+
+
+    handleDelete = (props) => {
+        console.log('in handle delete')
+
+        return Axios.delete(`https://nc-news-heroku.herokuapp.com/api/comments/${props}`)
+            .then(res => {
+                console.log(res)
+                this.setState(currentState => {
+                    return {
+                        comments: currentState.comments.filter(comment => comment.comment_id !== props)
+                    }
+                })
             })
     }
 
 
     render() {
         // console.log('rendering')
-        console.log(this.state, 'comments state')
+        // console.log(this.state, 'comments state')
         // console.log(this.props, 'comments props')
 
-        const { comments, isLoading, voteChange } = this.state
+        const { comments, isLoading, voteChange, voteError } = this.state
+
 
         if (isLoading === true) {
             return <h2>Loading page...</h2>
@@ -76,7 +95,8 @@ class ArticleComments extends Component {
         return (
             <div>
                 < CommentForm postComment={this.postComment} />
-
+                <br></br>
+                <h3>Otherwise, let's see what others have to say...</h3>
                 <ul>
                     {comments.map(comment => {
                         return (
@@ -89,7 +109,13 @@ class ArticleComments extends Component {
 
                                     Current votes: {comment.votes + voteChange}<br></br><br></br>
                                     Let us know what you thought of the comment by clicking on the buttons below...<br></br><br></br>
-                                    <button className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
+
+                                    {voteError !== false && <p>Error. can not vote</p>}
+                                    <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
+                                    <br></br><br></br>
+
+
+                                    <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
                                 </p>
                             </li>
                         )

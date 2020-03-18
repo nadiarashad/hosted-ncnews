@@ -5,6 +5,7 @@ import Axios from 'axios';
 // import Article from './Article';
 import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
+import Topics from './Topics'
 
 /* 
 need to add sort by: 
@@ -33,25 +34,37 @@ class AllArticles extends Component {
     };
 
     handleSort = (value) => {
-        this.setState((currentState) => {
-            return {
-                articles: currentState.articles.sort(function (a, b) {
+        console.log('in handle sort')
+        console.log(value)
 
-                    if (value === 'date_created') {
-                        if (a[value] < b[value]) {
-                            return -1
-                        }
-                        if (a[value] > b[value]) {
-                            return 1
-                        }
-                        return 0
-                    }
-                    // if (value === 'comment_count' || value === 'votes') {
-                    return a[value] - b[value]
-                    // }
-                })
+        return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles?sort_by=${value}`)
+            .then(res => {
+                this.setState({ articles: res.data.articles, isLoading: false })
+            })
+    }
+
+    handleOrder = (value) => {
+        console.log('in handle order')
+        console.log(value)
+        return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles?order=${value}`)
+            .then(res => {
+                this.setState({ articles: res.data.articles, isLoading: false })
+            })
+    }
+
+    filterArticles = (value) => {
+        console.log(value.topic)
+
+        console.log('in filterarticles')
+
+        // const { author, topic } = value
+        this.setState(currentState => {
+            return {
+                articles: currentState.articles.filter(article => article.topic === value.topic)
             }
         })
+
+
     }
 
 
@@ -68,11 +81,11 @@ class AllArticles extends Component {
 
         return (
             <div >
-
+                {/* <Topics articles={articles} /> */}
                 <br>
                 </br>
                 <h2>All articles</h2>
-                <SortArticles handleSort={this.handleSort} />
+                <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} />
                 <br></br>
                 <ul className={StyleSheet.articleTable}>
                     {articles.map(article => {

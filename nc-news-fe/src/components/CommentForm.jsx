@@ -15,8 +15,8 @@ class AddComment extends Component {
     };
 
     handleSubmit = event => {
-        console.log('handlingsubmit')
-        console.log(this.props)
+        // console.log('handlingsubmit')
+        // console.log(this.props)
         event.preventDefault();
 
         const { postComment } = this.props;
@@ -26,12 +26,13 @@ class AddComment extends Component {
     };
 
     render() {
-        console.log(this.state, 'state of commentform')
+        // console.log(this.state, 'state of commentform')
 
 
         return (
             <div>
                 <h2>Have something to say? Add a comment here!</h2>
+
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:{' '}

@@ -9,7 +9,7 @@ import Article from './components/Article'
 import ArticleComments from './components/ArticleComments'
 import Topics from './components/Topics'
 // import Footer from './components/Footer'
-// import AllComments from './components/AllComments'
+import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 
 
@@ -30,6 +30,7 @@ function App() {
         <Article path="/articles/:article_id/*" />
         <ArticleComments path="/articles/:article_id/comments" />
         <Topics path="/topics" />
+        <AllComments path="/comments" />
 
         <ErrorPage default status={404} msg={'Page not found'} />
 

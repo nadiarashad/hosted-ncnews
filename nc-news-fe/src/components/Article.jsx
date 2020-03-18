@@ -14,14 +14,9 @@ class Article extends Component {
     }
 
 
-
-
-
     fetchArticle = () => {
         return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`)
     }
-
-
 
     componentDidMount() {
         // console.log('mounted')
@@ -31,10 +26,10 @@ class Article extends Component {
     };
 
     handleVoteUpdates = (num) => {
-        console.log('in handle votes')
+        // console.log('in handle votes')
         return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`, { inc_votes: num })
             .then(res => {
-                console.log(res, 'handlevote res')
+                // console.log(res, 'handlevote res')
                 this.setState(prevState => {
                     return {
                         voteChange: prevState.voteChange + num

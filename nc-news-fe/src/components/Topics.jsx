@@ -6,9 +6,13 @@ class Topics extends Component {
 
     state = {
         topics: [],
-        isLoading: true
+        isLoading: true,
+        articles: []
     }
 
+    // fetchAllArticles = () => {
+    //     return Axios.get('https://nc-news-heroku.herokuapp.com/api/articles/')
+    // }
 
     fetchAllTopics = () => {
         return Axios.get("https://nc-news-heroku.herokuapp.com/api/topics")
@@ -16,15 +20,17 @@ class Topics extends Component {
 
     componentDidMount() {
         this.fetchAllTopics()
+            // this.fetchAllArticles()
             .then(res => {
                 console.log(res, 'res')
-                this.setState({ topics: res.data.topics, isLoading: false })
+                this.setState({ topics: res.data.topics, isLoading: false, articles: res.data.articles })
             })
     }
 
 
     render() {
         console.log(this.state, 'topics state')
+        console.log(this.props, 'props')
         const { topics, isLoading } = this.state
 
         if (isLoading === true) {
