@@ -65,7 +65,7 @@ class Article extends Component {
                         {article.body}<br></br><br></br>
                         Current votes: {article.votes + voteChange}<br></br><br></br>
                         Let us know what you thought of this article by clicking on the buttons below...<br></br><br></br>
-                        <button className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
+                        <button disable={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disable={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
 
 
                         <br></br><br></br>

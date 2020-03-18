@@ -23,6 +23,8 @@ class SortArticles extends Component {
         this.setState({ author: '', topic: '' })
     };
 
+
+
     render() {
         console.log(this.state)
         console.log(this.props, 'props')
@@ -67,6 +69,7 @@ class SortArticles extends Component {
                         />
                         <button type="submit">Submit</button>
                     </label>
+                    <button onClick={this.props.clearFilters}>Clear filters</button>
                 </form>
 
             </div>

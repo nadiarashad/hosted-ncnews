@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-// import styles from './AllArticles.module.css';
-// import Votes from './votes'
-// import Article from './Article';
 import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
-import Topics from './Topics'
+import moment from 'moment'
 
-/* 
-need to add sort by: 
-date created
-comment_count
-votes
-*/
 
 class AllArticles extends Component {
 
@@ -57,60 +48,64 @@ class AllArticles extends Component {
 
         console.log('in filterarticles')
 
-        // const { author, topic } = value
-        this.setState(currentState => {
-            return {
-                articles: currentState.articles.filter(article => article.topic === value.topic)
-            }
-        })
+        const topic = value.topic
+        const author = value.author
 
+        if (topic) {
+            this.setState(currentState => {
+                return {
+                    articles: currentState.articles.filter(article => article.topic === topic)
+                }
+            })
+        }
+
+        if (author) {
+            this.setState(currentState => {
+                return {
+                    articles: currentState.articles.filter(article => article.author === author)
+                }
+            })
+        }
+    }
+
+    clearFilters = () => {
+        this.componentDidMount()
 
     }
 
 
     render() {
-
         const { articles, isLoading } = this.state
-
         // console.log(this.state, 'state: articles')
         // console.log(this.props, 'allarticlesprops')
         if (isLoading === true) {
             return <p>Is Loading ...</p>;
         }
 
-
         return (
             <div >
-                {/* <Topics articles={articles} /> */}
                 <br>
                 </br>
                 <h2>All articles</h2>
-                <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} />
+                <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} clearFilters={this.clearFilters} />
                 <br></br>
                 <ul className={StyleSheet.articleTable}>
                     {articles.map(article => {
                         return (
-
                             <li key={article.article_id}>
                                 <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
                                 <p>
                                     Author: {article.author}<br></br>
                                     ID: {article.article_id}<br></br>
                                     Topic: {article.topic} <br></br>
-                                    Created: {article.created_at}<br></br><br></br>
+                                    Created: {moment(article.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
                                     Current votes: {article.votes}<br></br>
                                     Comment count: {article.comment_count}
-
                                 </p>
                             </li>
                         )
                     })}
-
-
                 </ul>
-
-
-
             </div>
         );
     }

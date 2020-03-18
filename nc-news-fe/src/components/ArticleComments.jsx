@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
-import CommentForm from './CommentForm'
+import CommentForm from './CommentForm';
+import moment from 'moment'
 
 //need to add delete comment - only if jessjelly is the logged in user
 
@@ -105,7 +106,7 @@ class ArticleComments extends Component {
                                 <p> Comment by: {comment.author}<br></br>
                                     {comment.body}<br></br>
                                     ID: {comment.comment_id}<br></br>
-                                    Commented at: {comment.created_at}<br></br><br></br>
+                                    Commented at: {moment(comment.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
 
                                     Current votes: {comment.votes + voteChange}<br></br><br></br>
                                     Let us know what you thought of the comment by clicking on the buttons below...<br></br><br></br>

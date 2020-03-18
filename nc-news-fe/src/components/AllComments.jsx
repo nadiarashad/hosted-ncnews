@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import moment from 'moment'
+
 
 class AllComments extends Component {
 
@@ -41,7 +43,7 @@ class AllComments extends Component {
                                     Author: {comment.author}<br></br><br></br>
                                     Comment: {comment.body}<br></br><br></br>
                                     Votes: {comment.votes}<br></br><br></br>
-                                    created at: {comment.created_at.slice(1)}<br></br><br></br>
+                                    created at: {moment(comment.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
                                 </p>
                             </li>
                         )
