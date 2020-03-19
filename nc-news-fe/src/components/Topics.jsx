@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from '@reach/router';
+// import { Link } from '@reach/router';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
+// import AllArticlesForTopic from './AllArticlesForTopic'
 
 class Topics extends Component {
 
@@ -9,7 +10,7 @@ class Topics extends Component {
         topics: [],
         isLoading: true,
         articles: [],
-        hasError: false
+        hasError: false,
     }
 
     componentDidMount() {
@@ -19,9 +20,10 @@ class Topics extends Component {
                 this.setState({ topics: res.data.topics, isLoading: false, articles: res.data.articles })
             }).catch((err) => {
                 this.setState({ isLoading: false, hasError: { msg: err.response.data.msg, status: err.response.data.status } })
-
             })
     }
+
+
 
     render() {
         const { topics, isLoading, hasError } = this.state
@@ -39,17 +41,18 @@ class Topics extends Component {
                     {topics.map(topic => {
                         return (
                             <li key={topic.slug}>
-                                <Link to={'/articles/'}><h2>{topic.slug}</h2></Link>
+                                <h2>{topic.slug}</h2>
+
                                 <p>
                                     {topic.description}
 
                                 </p>
+                                <button>Take me to all related articles</button>
 
                             </li>
                         )
                     })
                     }
-
                 </ul>
             </div>
         );

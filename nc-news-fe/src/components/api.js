@@ -28,6 +28,14 @@ export const handlingOrder = (value) => {
     return Axios.get(`${BaseURL}/articles?order=${value}`, { params: { value } })
 }
 
+export const handleFilter = (value, tofilterby) => {
+    return Axios.get(`${BaseURL}/articles?${tofilterby}=${value}`, { params: { value } })
+
+}
+// export const handleFilterAuthor = (value) => {
+//     return Axios.get(`${BaseURL}/articles?author=${value}`, { params: { value } })
+
+// }
 
 export const fetchAllComments = () => {
     return Axios.get(`${BaseURL}/comments`)

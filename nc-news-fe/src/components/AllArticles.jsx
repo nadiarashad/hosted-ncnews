@@ -4,6 +4,7 @@ import SortArticles from './SortArticles';
 import moment from 'moment'
 import * as api from './api';
 import ErrorPage from './ErrorPage'
+// import Axios from 'axios'
 
 class AllArticles extends Component {
 
@@ -18,6 +19,7 @@ class AllArticles extends Component {
         api.fetchAllArticles().then(res => {
             this.setState({ articles: res.data.articles, isLoading: false });
         }).catch((err) => {
+            console.dir(err, 'all articles err')
             this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
         })
     };
@@ -27,6 +29,7 @@ class AllArticles extends Component {
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             }).catch((err) => {
+                console.dir(err, 'handling sort err')
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
@@ -36,6 +39,7 @@ class AllArticles extends Component {
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             }).catch((err) => {
+                console.dir(err, 'handling order err')
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
@@ -45,19 +49,17 @@ class AllArticles extends Component {
         const author = value.author
 
         if (topic) {
-            this.setState(currentState => {
-                return {
-                    articles: currentState.articles.filter(article => article.topic === topic)
-                }
-            })
+            api.handleFilter(topic, 'topic')
+                .then(res => {
+                    this.setState({ articles: res.data.articles, isLoading: false })
+                })
         }
 
         if (author) {
-            this.setState(currentState => {
-                return {
-                    articles: currentState.articles.filter(article => article.author === author)
-                }
-            })
+            api.handleFilter(author, 'author')
+                .then(res => {
+                    this.setState({ articles: res.data.articles, isLoading: false })
+                })
         }
     }
 

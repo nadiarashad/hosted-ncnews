@@ -13,9 +13,6 @@ import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 import Axios from 'axios';
 
-
-
-
 class App extends Component {
 
   state = {
@@ -63,7 +60,7 @@ class App extends Component {
           <Home path="/" />
           <AllArticles path="/articles/" />
           <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} />
-          <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} />
+          {/* <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} /> */}
           <Topics path="/topics" />
           <AllComments path="/comments" />
 

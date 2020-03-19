@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
-import CommentForm from './CommentForm';
+// import CommentForm from './CommentForm';
 import moment from 'moment';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
@@ -62,7 +62,7 @@ class ArticleComments extends Component {
 
         api.handlingDelete(props)
             .then(res => {
-                console.log(res)
+
                 this.setState(currentState => {
                     return {
                         comments: currentState.comments.filter(comment => comment.comment_id !== props)
@@ -77,8 +77,6 @@ class ArticleComments extends Component {
     render() {
         const { comments, isLoading, voteChange, voteError, hasError } = this.state
 
-        const { loggedInUser } = this.props
-
         if (isLoading === true) {
             return <h2>Loading page...</h2>
         }
@@ -88,13 +86,11 @@ class ArticleComments extends Component {
         }
         return (
             <div>
-                <>
-                    {loggedInUser && (
-                        < CommentForm postComment={this.postComment} />
-                    )}
-                    <br></br>
-                </>
-                <h3>Otherwise, let's see what others have to say...</h3>
+
+                <br></br>
+
+                <h3>All comments are below..</h3>
+
                 <ul>
                     {comments.map(comment => {
                         return (
@@ -112,17 +108,13 @@ class ArticleComments extends Component {
                                     <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
                                     <br></br><br></br>
 
-                                    <>
-                                        {loggedInUser &&
-                                            <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
-                                        }
-                                    </>
+
                                 </p>
                             </li>
                         )
                     })}
                 </ul>
-            </div>
+            </div >
         );
     }
 }
