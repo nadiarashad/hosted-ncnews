@@ -11,7 +11,7 @@ import Topics from './components/Topics'
 // import Footer from './components/Footer'
 import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
-
+import Axios from 'axios';
 
 
 
@@ -20,19 +20,39 @@ class App extends Component {
 
   state = {
     loggedInUser: null,
-    users: []
+    users: [],
+    validUser: false
   }
 
+  fetchUsers = () => {
+    return Axios.get('https://nc-news-heroku.herokuapp.com/api/users')
+  }
+
+  componentDidMount() {
+    this.fetchUsers()
+      .then(res => {
+        this.setState({ users: res.data.users.map(user => user.username) });
+      });
+  }
+
+
   logInUser = (username) => {
-    this.setState({ loggedInUser: username })
+
+
+    if (this.state.users.includes(username)) {
+
+      this.setState({ loggedInUser: username, validUser: true })
+    }
+
   }
 
   render() {
+    // console.log(this.state)
     const { loggedInUser } = this.state
     return (
       <div className="App" >
 
-        <Header loggedInUser={loggedInUser} logInUser={this.logInUser} />
+        <Header loggedInUser={loggedInUser} logInUser={this.logInUser} validUser={this.validUser} />
         <Nav />
         <br></br>
         <br></br>
@@ -42,7 +62,7 @@ class App extends Component {
           <Home path="/" />
           <AllArticles path="/articles/" />
           <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} />
-          <ArticleComments path="/articles/:article_id/comments" />
+          <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} />
           <Topics path="/topics" />
           <AllComments path="/comments" />
 

@@ -41,20 +41,20 @@ class Article extends Component {
     }
 
 
-
-
     render() {
         // console.log(this.state, 'state')
-        console.log(this.props, 'article props')
+
 
         const { isLoading, article, voteChange } = this.state
+        const { validUser } = this.props
 
+        console.log(this.props, 'article props')
 
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
         }
 
-        const submitDisabled = this.props.loggedInUser !== 'jessjelly'
+
 
         return (
             <div>

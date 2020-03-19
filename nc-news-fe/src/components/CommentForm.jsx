@@ -28,34 +28,46 @@ class AddComment extends Component {
     render() {
         // console.log(this.state, 'state of commentform')
 
+        console.log(this.props, 'commentformprops')
+
+        const { loggedInUser, validUser } = this.props
 
         return (
-            <div>
-                <h2>Have something to say? Add a comment here!</h2>
 
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:{' '}
-                        <input
-                            value={this.state.username}
-                            type="text"
-                            onChange={event => {
-                                this.handleInput('username', event.target.value);
-                            }}
-                        />
-                        Your comment here:{' '}
-                        <input
-                            value={this.state.body}
-                            type="text"
-                            onChange={event => {
-                                this.handleInput('body', event.target.value);
-                            }}
-                        />
-                        <button type="submit">Submit</button>
-                    </label>
-                </form>
-            </div>
+            <>
+                {loggedInUser && (
+
+                    <div>
+                        <h2>Have something to say? Add a comment here!</h2>
+                        <p>You will need to be logged in to post or delete a comment</p>
+
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                Username:{''}
+                                <input
+                                    value={this.state.username}
+                                    type="text"
+                                    onChange={event => {
+                                        this.handleInput('username', event.target.value);
+                                    }}
+                                />
+                                Your comment here:{' '}
+                                <input
+                                    value={this.state.body}
+                                    type="text"
+                                    onChange={event => {
+                                        this.handleInput('body', event.target.value);
+                                    }}
+                                />
+                                <button type="submit" >Submit</button>
+                            </label>
+                        </form>
+                    </div>
+
+                )}
+            </>
         );
+
     }
 }
 
