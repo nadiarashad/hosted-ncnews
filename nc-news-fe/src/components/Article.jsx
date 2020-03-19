@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 import { Link, Router } from '@reach/router';
-import ArticleComments from './ArticleComments'
+import ArticleComments from './ArticleComments';
+import * as api from './api'
 
 
 class Article extends Component {
@@ -14,20 +14,22 @@ class Article extends Component {
     }
 
 
-    fetchArticle = () => {
-        return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`)
-    }
+    // fetchArticle = () => {
+    //     return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`)
+    // }
 
     componentDidMount() {
         // console.log('mounted')
-        this.fetchArticle().then(res => {
+        api.fetchArticle(this.props.article_id).then(res => {
             this.setState({ article: res.data.article, isLoading: false, voteChange: 0 });
         });
     };
 
     handleVoteUpdates = (num) => {
         // console.log('in handle votes')
-        return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`, { inc_votes: num })
+        // return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`, { inc_votes: num })
+
+        api.fetchingVotes(this.props.article_id, num)
             .then(res => {
                 // console.log(res, 'handlevote res')
                 this.setState(prevState => {
@@ -43,7 +45,7 @@ class Article extends Component {
 
     render() {
         // console.log(this.state, 'state')
-        // console.log(this.props, 'article props')
+        console.log(this.props, 'article props')
 
         const { isLoading, article, voteChange } = this.state
 
@@ -51,6 +53,8 @@ class Article extends Component {
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
         }
+
+        const submitDisabled = this.props.loggedInUser !== 'jessjelly'
 
         return (
             <div>
@@ -65,7 +69,7 @@ class Article extends Component {
                         {article.body}<br></br><br></br>
                         Current votes: {article.votes + voteChange}<br></br><br></br>
                         Let us know what you thought of this article by clicking on the buttons below...<br></br><br></br>
-                        <button disable={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disable={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
+                        <button onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
 
 
                         <br></br><br></br>

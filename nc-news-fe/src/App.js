@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Header from './components/header'
 import Home from './components/Home'
@@ -15,28 +15,44 @@ import ErrorPage from './components/ErrorPage'
 
 
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Nav />
-      <br></br>
-      <br></br>
-      <br></br>
 
-      <Router>
-        <Home path="/" />
-        <AllArticles path="/articles/" />
-        <Article path="/articles/:article_id/*" />
-        <ArticleComments path="/articles/:article_id/comments" />
-        <Topics path="/topics" />
-        <AllComments path="/comments" />
+class App extends Component {
 
-        <ErrorPage default status={404} msg={'Page not found'} />
+  state = {
+    loggedInUser: null,
+    users: []
+  }
 
-      </Router>
-    </div>
-  );
+  logInUser = (username) => {
+    this.setState({ loggedInUser: username })
+  }
+
+  render() {
+    const { loggedInUser } = this.state
+    return (
+      <div className="App" >
+
+        <Header loggedInUser={loggedInUser} logInUser={this.logInUser} />
+        <Nav />
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <Router>
+          <Home path="/" />
+          <AllArticles path="/articles/" />
+          <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} />
+          <ArticleComments path="/articles/:article_id/comments" />
+          <Topics path="/topics" />
+          <AllComments path="/comments" />
+
+          <ErrorPage default status={404} msg={'Page not found'} />
+
+        </Router>
+      </div>
+    );
+
+  }
 }
 
 export default App;
