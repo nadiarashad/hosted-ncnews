@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
 import CommentForm from './CommentForm';
-import moment from 'moment'
+import moment from 'moment';
+import * as api from './api';
 
 //need to add delete comment - only if jessjelly is the logged in user
 
@@ -16,11 +17,13 @@ class ArticleComments extends Component {
     }
 
     postComment = newComment => {
-        console.log(newComment, 'newComment')
+
         const { username, body } = newComment
+
         return Axios.post(
             `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
             { username, body })
+
             .then(res => {
                 console.log(res, 'post res')
                 this.setState(currentState => {
@@ -33,16 +36,11 @@ class ArticleComments extends Component {
     };
 
 
-    fetchCommentsPerID = () => {
-        // console.log('fetchCommentsPerID')
-        return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`)
-    }
+
 
     componentDidMount() {
-        // console.log('in did update')
-        this.fetchCommentsPerID()
+        api.fetchCommentsPerID(this.props.article_id)
             .then(res => {
-                // console.log(res, 'res')
                 this.setState({ comments: res.data.comments, isLoading: false });
             })
             .catch((err) => {
@@ -52,10 +50,8 @@ class ArticleComments extends Component {
 
 
     handleVoteUpdates = (num) => {
-        // console.log('in handle votes')
-        return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/`, { inc_votes: num })
+        api.handleCommentVoteUpdates(this.props.article_id, num)
             .then(res => {
-                // console.log(res, 'handlevote res')
                 this.setState(prevState => {
                     return {
                         voteChange: prevState.voteChange + num
@@ -68,9 +64,8 @@ class ArticleComments extends Component {
 
 
     handleDelete = (props) => {
-        console.log('in handle delete')
 
-        return Axios.delete(`https://nc-news-heroku.herokuapp.com/api/comments/${props}`)
+        api.handlingDelete(props)
             .then(res => {
                 console.log(res)
                 this.setState(currentState => {
@@ -83,13 +78,7 @@ class ArticleComments extends Component {
 
 
     render() {
-        // console.log('rendering')
-        // console.log(this.state, 'comments state')
-        // console.log(this.props, 'comments props')
-
         const { comments, isLoading, voteChange, voteError } = this.state
-
-        console.log(this.props, 'articleComments prop')
 
         const { loggedInUser } = this.props
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 import moment from 'moment'
+import * as api from './api'
 
 
 class AllComments extends Component {
@@ -10,13 +10,8 @@ class AllComments extends Component {
         isLoading: true
     }
 
-    fetchAllComments = () => {
-        return Axios.get('https://nc-news-heroku.herokuapp.com/api/comments')
-    }
-
     componentDidMount() {
-        this.fetchAllComments()
-            // this.fetchAllArticles()
+        api.fetchAllComments()
             .then(res => {
                 console.log(res, 'res')
                 this.setState({ comments: res.data.comments, isLoading: false })

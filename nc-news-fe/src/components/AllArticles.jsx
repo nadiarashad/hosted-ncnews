@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
 import moment from 'moment'
-
+import * as api from './api'
 
 class AllArticles extends Component {
 
@@ -12,42 +11,28 @@ class AllArticles extends Component {
         isLoading: true,
     }
 
-    fetchAllArticles = () => {
-        return Axios.get('https://nc-news-heroku.herokuapp.com/api/articles/')
-
-    }
-
     componentDidMount() {
         // console.log('mounted')
-        this.fetchAllArticles().then(res => {
+        api.fetchAllArticles().then(res => {
             this.setState({ articles: res.data.articles, isLoading: false });
         });
     };
 
     handleSort = (value) => {
-        console.log('in handle sort')
-        console.log(value)
-
-        return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles?sort_by=${value}`)
+        api.handlingSort(value)
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             })
     }
 
     handleOrder = (value) => {
-        console.log('in handle order')
-        console.log(value)
-        return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles?order=${value}`)
+        api.handlingOrder(value)
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             })
     }
 
     filterArticles = (value) => {
-        console.log(value.topic)
-
-        console.log('in filterarticles')
-
         const topic = value.topic
         const author = value.author
 

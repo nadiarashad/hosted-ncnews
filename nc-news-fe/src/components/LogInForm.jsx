@@ -21,8 +21,6 @@ class LogInForm extends Component {
 
 
     render() {
-        // console.log(this.state, 'satte')
-        // console.log(this.props, 'props')
         const { loggedInUser } = this.props
         return (
             <div>

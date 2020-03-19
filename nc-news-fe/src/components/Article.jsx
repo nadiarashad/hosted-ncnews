@@ -42,19 +42,12 @@ class Article extends Component {
 
 
     render() {
-        // console.log(this.state, 'state')
-
-
         const { isLoading, article, voteChange } = this.state
-        const { validUser, isLoggedIn } = this.props
-
-        // console.log(this.props, 'article props')
+        const { validUser } = this.props
 
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
         }
-
-
 
         return (
             <div>
@@ -69,8 +62,7 @@ class Article extends Component {
                         {article.body}<br></br><br></br>
                         Current votes: {article.votes + voteChange}<br></br><br></br>
                         Let us know what you thought of this article by clicking on the buttons below...<br></br><br></br>
-                        <button onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
-
+                        <button disabled={voteChange !== 0} onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
 
                         <br></br><br></br>
                         Comments: {article.comment_count}<br></br><br></br>

@@ -24,12 +24,7 @@ class AddComment extends Component {
     };
 
     render() {
-        console.log(this.props, 'commentformprops')
-        console.log(this.props)
         return (
-
-
-
             <div>
                 <h2>Have something to say? Add a comment here!</h2>
                 <p>You will need to be logged in to post or delete a comment</p>
