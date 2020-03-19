@@ -21,7 +21,8 @@ class App extends Component {
   state = {
     loggedInUser: null,
     users: [],
-    validUser: false
+    validUser: false,
+    isLoggedIn: false
   }
 
   fetchUsers = () => {
@@ -41,7 +42,7 @@ class App extends Component {
 
     if (this.state.users.includes(username)) {
 
-      this.setState({ loggedInUser: username, validUser: true })
+      this.setState({ loggedInUser: username, validUser: true, isLoggedIn: true })
     }
 
   }
@@ -61,8 +62,8 @@ class App extends Component {
         <Router>
           <Home path="/" />
           <AllArticles path="/articles/" />
-          <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} />
-          <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} />
+          <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} />
+          <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} />
           <Topics path="/topics" />
           <AllComments path="/comments" />
 

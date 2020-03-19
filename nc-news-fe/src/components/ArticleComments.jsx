@@ -89,14 +89,23 @@ class ArticleComments extends Component {
 
         const { comments, isLoading, voteChange, voteError } = this.state
 
+        console.log(this.props, 'articleComments prop')
+
+        const { loggedInUser } = this.props
 
         if (isLoading === true) {
             return <h2>Loading page...</h2>
         }
         return (
             <div>
-                < CommentForm postComment={this.postComment} />
-                <br></br>
+
+                <>
+                    {loggedInUser && (
+                        < CommentForm postComment={this.postComment} />
+
+                    )}
+                    <br></br>
+                </>
                 <h3>Otherwise, let's see what others have to say...</h3>
                 <ul>
                     {comments.map(comment => {

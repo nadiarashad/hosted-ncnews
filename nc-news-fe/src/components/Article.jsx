@@ -46,9 +46,9 @@ class Article extends Component {
 
 
         const { isLoading, article, voteChange } = this.state
-        const { validUser } = this.props
+        const { validUser, isLoggedIn } = this.props
 
-        console.log(this.props, 'article props')
+        // console.log(this.props, 'article props')
 
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
@@ -59,7 +59,7 @@ class Article extends Component {
         return (
             <div>
                 <Router>
-                    < ArticleComments path='/comments' />
+                    < ArticleComments path='/comments' validUser={validUser} />
                 </Router>
                 <ul>
                     <h3>{article.title}</h3>
