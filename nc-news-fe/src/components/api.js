@@ -8,7 +8,6 @@ export const fetchArticle = (article_id) => {
     return Axios.get(`${BaseURL}articles/${article_id}`, { params: { article_id } })
 }
 
-
 export const fetchingVotes = (article_id, num) => {
     return Axios.patch(`${BaseURL}articles/${article_id}`, { params: { inc_votes: num, article_id } })
 }
@@ -51,5 +50,8 @@ export const fetchCommentsPerID = (article_id) => {
 
 export const handlingDelete = (props) => {
     return Axios.delete(`${BaseURL}/comments/${props}`, { params: { props } })
+}
 
+export const fetchAllTopics = () => {
+    return Axios.get("https://nc-news-heroku.herokuapp.com/api/topics")
 }

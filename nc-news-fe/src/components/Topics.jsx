@@ -1,42 +1,38 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 import { Link } from '@reach/router';
+import * as api from './api';
+import ErrorPage from './ErrorPage'
 
 class Topics extends Component {
 
     state = {
         topics: [],
         isLoading: true,
-        articles: []
-    }
-
-    // fetchAllArticles = () => {
-    //     return Axios.get('https://nc-news-heroku.herokuapp.com/api/articles/')
-    // }
-
-    fetchAllTopics = () => {
-        return Axios.get("https://nc-news-heroku.herokuapp.com/api/topics")
+        articles: [],
+        hasError: false
     }
 
     componentDidMount() {
-        this.fetchAllTopics()
-            // this.fetchAllArticles()
+
+        api.fetchAllTopics()
             .then(res => {
-                console.log(res, 'res')
                 this.setState({ topics: res.data.topics, isLoading: false, articles: res.data.articles })
+            }).catch((err) => {
+                this.setState({ isLoading: false, hasError: { msg: err.response.data.msg, status: err.response.data.status } })
+
             })
     }
 
-
     render() {
-        console.log(this.state, 'topics state')
-        console.log(this.props, 'props')
-        const { topics, isLoading } = this.state
+        const { topics, isLoading, hasError } = this.state
 
         if (isLoading === true) {
             return <h1>is loading...</h1>
         }
+        if (hasError) {
 
+            return <ErrorPage status={hasError.status} msg={hasError.msg} />
+        }
         return (
             <div>
                 <ul>
@@ -55,9 +51,6 @@ class Topics extends Component {
                     }
 
                 </ul>
-
-
-
             </div>
         );
     }

@@ -8,13 +8,12 @@ class SortArticles extends Component {
 
 
     handleFilterInput = (field, input) => {
-        console.log('handle filter input')
+
         this.setState({ [field]: input })
     }
 
     handleSubmit = event => {
-        console.log('handlingsubmit')
-        // console.log(this.props)
+
         event.preventDefault();
 
         const { filterArticles } = this.props;
@@ -26,8 +25,7 @@ class SortArticles extends Component {
 
 
     render() {
-        console.log(this.state)
-        console.log(this.props, 'props')
+
         return (
             <div>
                 sort:

@@ -2,26 +2,32 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
 import moment from 'moment'
-import * as api from './api'
+import * as api from './api';
+import ErrorPage from './ErrorPage'
 
 class AllArticles extends Component {
 
     state = {
         articles: [],
         isLoading: true,
+        hasError: false
     }
 
     componentDidMount() {
-        // console.log('mounted')
+
         api.fetchAllArticles().then(res => {
             this.setState({ articles: res.data.articles, isLoading: false });
-        });
+        }).catch((err) => {
+            this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
+        })
     };
 
     handleSort = (value) => {
         api.handlingSort(value)
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
+            }).catch((err) => {
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
@@ -29,6 +35,8 @@ class AllArticles extends Component {
         api.handlingOrder(value)
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
+            }).catch((err) => {
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
@@ -55,16 +63,19 @@ class AllArticles extends Component {
 
     clearFilters = () => {
         this.componentDidMount()
-
     }
 
 
     render() {
-        const { articles, isLoading } = this.state
-        // console.log(this.state, 'state: articles')
-        // console.log(this.props, 'allarticlesprops')
+        const { articles, isLoading, hasError } = this.state
+
         if (isLoading === true) {
             return <p>Is Loading ...</p>;
+        }
+
+        if (hasError) {
+
+            return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
 
         return (

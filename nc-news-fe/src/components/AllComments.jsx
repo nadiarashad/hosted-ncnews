@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import * as api from './api'
+import ErrorPage from './ErrorPage'
 
 
 class AllComments extends Component {
 
     state = {
         comments: [],
-        isLoading: true
+        isLoading: true,
+        hasError: false
     }
 
     componentDidMount() {
         api.fetchAllComments()
             .then(res => {
-                console.log(res, 'res')
                 this.setState({ comments: res.data.comments, isLoading: false })
+            }).catch((err) => {
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
     render() {
-        const { comments, isLoading } = this.state
+        const { comments, isLoading, hasError } = this.state
         console.log(this.state, 'comments state')
 
         if (isLoading === true) {
             return <h2>Page Loading ...</h2>
+        }
+        if (hasError) {
+
+            return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
         return (
             <div>

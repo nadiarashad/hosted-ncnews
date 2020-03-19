@@ -3,8 +3,7 @@ import Axios from 'axios'
 import CommentForm from './CommentForm';
 import moment from 'moment';
 import * as api from './api';
-
-//need to add delete comment - only if jessjelly is the logged in user
+import ErrorPage from './ErrorPage'
 
 class ArticleComments extends Component {
 
@@ -25,18 +24,14 @@ class ArticleComments extends Component {
             { username, body })
 
             .then(res => {
-                console.log(res, 'post res')
                 this.setState(currentState => {
                     return { comments: [res.data.comment, ...currentState.comments] };
                 });
             })
             .catch((err) => {
-                this.setState({ hasError: err, isLoading: false })
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     };
-
-
-
 
     componentDidMount() {
         api.fetchCommentsPerID(this.props.article_id)
@@ -44,7 +39,7 @@ class ArticleComments extends Component {
                 this.setState({ comments: res.data.comments, isLoading: false });
             })
             .catch((err) => {
-                this.setState({ isLoading: false, hasError: err })
+                this.setState({ isLoading: false, hasError: { msg: err.response.data.msg, status: err.response.data.status } })
             })
     }
 
@@ -58,7 +53,7 @@ class ArticleComments extends Component {
                     };
                 });
             }).catch((err) => {
-                this.setState({ voteError: err, isLoading: false })
+                this.setState({ voteError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
@@ -73,17 +68,23 @@ class ArticleComments extends Component {
                         comments: currentState.comments.filter(comment => comment.comment_id !== props)
                     }
                 })
+            }).catch((err) => {
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
 
     render() {
-        const { comments, isLoading, voteChange, voteError } = this.state
+        const { comments, isLoading, voteChange, voteError, hasError } = this.state
 
         const { loggedInUser } = this.props
 
         if (isLoading === true) {
             return <h2>Loading page...</h2>
+        }
+        if (hasError) {
+
+            return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
         return (
             <div>

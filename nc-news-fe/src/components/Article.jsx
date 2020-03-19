@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Router } from '@reach/router';
 import ArticleComments from './ArticleComments';
 import * as api from './api'
+import ErrorPage from './ErrorPage'
 
 
 class Article extends Component {
@@ -10,43 +11,47 @@ class Article extends Component {
         article: {},
         isLoading: true,
         comments: [],
-        voteChange: 0
+        voteChange: 0,
+        hasError: false
     }
 
 
-    // fetchArticle = () => {
-    //     return Axios.get(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`)
-    // }
 
     componentDidMount() {
-        // console.log('mounted')
         api.fetchArticle(this.props.article_id).then(res => {
             this.setState({ article: res.data.article, isLoading: false, voteChange: 0 });
-        });
+        }).catch((err) => {
+            console.dir(err, 'article err')
+            this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
+        })
     };
 
     handleVoteUpdates = (num) => {
-        // console.log('in handle votes')
-        // return Axios.patch(`https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}`, { inc_votes: num })
 
         api.fetchingVotes(this.props.article_id, num)
             .then(res => {
-                // console.log(res, 'handlevote res')
                 this.setState(prevState => {
                     return {
                         voteChange: prevState.voteChange + num
                     };
                 });
+            }).catch((err) => {
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
 
     render() {
-        const { isLoading, article, voteChange } = this.state
+        const { isLoading, article, voteChange, hasError } = this.state
         const { validUser } = this.props
 
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
+        }
+
+        if (hasError) {
+
+            return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
 
         return (

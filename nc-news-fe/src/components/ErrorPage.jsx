@@ -1,9 +1,11 @@
 import React from 'react';
 
 const ErrorPage = (props) => {
+    console.log(props)
+    const { status, msg } = props
     return (
         <div>
-            <h1>ERRRRRRRRRRRRRRRORRRRRRRRRRRRR</h1>
+            <p>Error: {status} {msg}</p>
         </div>
     );
 };
