@@ -98,11 +98,9 @@ class ArticleComments extends Component {
         }
         return (
             <div>
-
                 <>
                     {loggedInUser && (
                         < CommentForm postComment={this.postComment} />
-
                     )}
                     <br></br>
                 </>
@@ -124,14 +122,15 @@ class ArticleComments extends Component {
                                     <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
                                     <br></br><br></br>
 
-
-                                    <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
+                                    <>
+                                        {loggedInUser &&
+                                            <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
+                                        }
+                                    </>
                                 </p>
                             </li>
                         )
-
                     })}
-
                 </ul>
             </div>
         );
