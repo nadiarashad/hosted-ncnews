@@ -12,6 +12,8 @@ import Topics from './components/Topics'
 import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 import Axios from 'axios';
+// import AllArticlesForTopic from './components/AllArticlesForTopic'
+import * as api from './components/api';
 
 class App extends Component {
 
@@ -19,7 +21,8 @@ class App extends Component {
     loggedInUser: null,
     users: [],
     validUser: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    articles: []
   }
 
   fetchUsers = () => {
@@ -31,6 +34,13 @@ class App extends Component {
       .then(res => {
         this.setState({ users: res.data.users.map(user => user.username) });
       });
+
+    api.fetchAllArticles().then(res => {
+      this.setState({ articles: res.data.articles, isLoading: false });
+    }).catch((err) => {
+      console.dir(err, 'all articles err')
+      this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
+    })
   }
 
 
@@ -44,8 +54,10 @@ class App extends Component {
 
   }
 
+
+
   render() {
-    // console.log(this.state)
+    // console.log(this.state, 'app state')
     const { loggedInUser } = this.state
     return (
       <div className="App" >
@@ -58,12 +70,12 @@ class App extends Component {
 
         <Router>
           <Home path="/" />
-          <AllArticles path="/articles/" />
-          <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} />
+          <AllArticles path="/articles/*" />
+          <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} articles={this.state.articles} />
           {/* <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} /> */}
-          <Topics path="/topics" />
+          <Topics path="/topics/*" articles={this.state.articles} />
           <AllComments path="/comments" />
-
+          {/* <AllArticlesForTopic path="/articles/:topic" /> */}
           <ErrorPage default status={404} msg={'Page not found'} />
 
         </Router>

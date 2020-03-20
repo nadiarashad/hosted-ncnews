@@ -15,7 +15,6 @@ class AllArticles extends Component {
     }
 
     componentDidMount() {
-
         api.fetchAllArticles().then(res => {
             this.setState({ articles: res.data.articles, isLoading: false });
         }).catch((err) => {
@@ -69,6 +68,7 @@ class AllArticles extends Component {
 
 
     render() {
+        // console.log(this.props, 'article props')
         const { articles, isLoading, hasError } = this.state
 
         if (isLoading === true) {

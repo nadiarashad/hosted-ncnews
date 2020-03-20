@@ -1,32 +1,47 @@
 import React, { Component } from 'react';
-// import { Link } from '@reach/router';
+// import { Router, Link } from '@reach/router';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
-// import AllArticlesForTopic from './AllArticlesForTopic'
+// import AllArticlesForTopic from './AllArticlesForTopic';
+
 
 class Topics extends Component {
 
     state = {
         topics: [],
         isLoading: true,
-        articles: [],
         hasError: false,
+        articles: [],
+        gotArticles: null
     }
 
     componentDidMount() {
 
         api.fetchAllTopics()
             .then(res => {
-                this.setState({ topics: res.data.topics, isLoading: false, articles: res.data.articles })
+                this.setState({ topics: res.data.topics, isLoading: false })
             }).catch((err) => {
                 this.setState({ isLoading: false, hasError: { msg: err.response.data.msg, status: err.response.data.status } })
             })
+
+    }
+
+    handleClick = (value) => {
+        console.log('in handle click')
+        console.log(value, 'value')
+        const { articles } = this.props
+
+        this.setState(currentState => {
+            return { articles: articles.filter(article => article.topic === value), gotArticles: true }
+        })
+
     }
 
 
-
     render() {
-        const { topics, isLoading, hasError } = this.state
+        console.log(this.state, 'this.state')
+        // console.log(this.props, 'topics props')
+        const { topics, isLoading, hasError, articles } = this.state
 
         if (isLoading === true) {
             return <h1>is loading...</h1>
@@ -37,6 +52,7 @@ class Topics extends Component {
         }
         return (
             <div>
+
                 <ul>
                     {topics.map(topic => {
                         return (
@@ -47,14 +63,31 @@ class Topics extends Component {
                                     {topic.description}
 
                                 </p>
-                                <button>Take me to all related articles</button>
-
+                                {/* <Link to={`/topics/${topic.slug}`} >View all related articles</Link> */}
+                                <button value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles here</button>
                             </li>
                         )
                     })
                     }
                 </ul>
-            </div>
+
+                <ul>
+                    {articles.map(article => {
+                        return (
+                            <li key={article.article_id}>
+                                <h3>{article.title}</h3>
+                                Author: {article.author} <br></br><br></br>
+
+                                Topic: {article.topic}<br></br><br></br>
+
+
+                            </li>
+                        )
+                    })}
+                </ul>
+
+
+            </div >
         );
     }
 }

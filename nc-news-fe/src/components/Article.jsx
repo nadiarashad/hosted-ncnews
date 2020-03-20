@@ -15,7 +15,8 @@ class Article extends Component {
         isLoading: true,
         comments: [],
         voteChange: 0,
-        hasError: false
+        hasError: false,
+
     }
 
 
@@ -34,11 +35,13 @@ class Article extends Component {
         api.fetchingVotes(this.props.article_id, num)
             .then(res => {
                 this.setState(prevState => {
+
                     return {
-                        voteChange: prevState.voteChange + num
+                        voteChange: prevState.voteChange + num,
                     };
-                });
-            }).catch((err) => {
+                })
+            })
+            .catch((err) => {
                 console.dir(err, 'articlevotes err')
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
@@ -50,7 +53,7 @@ class Article extends Component {
     render() {
         const { isLoading, article, voteChange, hasError } = this.state
 
-
+        console.log(this.state, 'state of article comments')
         // console.log(this.props, 'props')
 
 
@@ -84,7 +87,6 @@ class Article extends Component {
 
 
                     <Router>
-
                         <ArticleComments path="/comments" loggedInUser={this.props.loggedInUser} isLoggedIn={this.props.isLoggedIn} />
                     </Router>
 

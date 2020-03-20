@@ -12,7 +12,8 @@ class ArticleComments extends Component {
         isLoading: true,
         voteChange: 0,
         hasError: false,
-        voteError: false
+        voteError: false,
+        commentChange: 0
     }
 
 
@@ -102,8 +103,6 @@ class ArticleComments extends Component {
                 <ul>
                     {comments.map(comment => {
                         return (
-
-
                             <li key={comment.comment_id}> <br></br>
 
                                 <p> Comment by: {comment.author}<br></br>
@@ -118,11 +117,9 @@ class ArticleComments extends Component {
                                     <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
                                     <br></br><br></br>
 
-                                    {/* {loggedInUser && */}
-                                    <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
-                                    {/* } */}
-
-
+                                    {loggedInUser &&
+                                        <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
+                                    }
                                 </p>
                             </li>
                         )
