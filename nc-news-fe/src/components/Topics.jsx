@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Router, Link } from '@reach/router';
+import { Router, Link } from '@reach/router';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
 // import AllArticlesForTopic from './AllArticlesForTopic';
@@ -63,7 +63,6 @@ class Topics extends Component {
                                     {topic.description}
 
                                 </p>
-                                {/* <Link to={`/topics/${topic.slug}`} >View all related articles</Link> */}
                                 <button value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles here</button>
                             </li>
                         )
@@ -71,16 +70,15 @@ class Topics extends Component {
                     }
                 </ul>
 
+
+                <br></br><br></br>
                 <ul>
                     {articles.map(article => {
                         return (
                             <li key={article.article_id}>
-                                <h3>{article.title}</h3>
+                                <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
                                 Author: {article.author} <br></br><br></br>
-
                                 Topic: {article.topic}<br></br><br></br>
-
-
                             </li>
                         )
                     })}
