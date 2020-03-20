@@ -47,7 +47,7 @@ class AddComment extends Component {
                                 this.handleInput('body', event.target.value);
                             }}
                         />
-                        <button type="submit" >Submit</button>
+                        <button disabled={!this.state.username || !this.state.body} type="submit" >Submit</button>
                     </label>
                 </form>
             </div>

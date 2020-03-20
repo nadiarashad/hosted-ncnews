@@ -31,9 +31,9 @@ class ArticleComments extends Component {
     handleVoteUpdates = (num) => {
         api.handleCommentVoteUpdates(this.props.article_id, num)
             .then(res => {
-                this.setState(prevState => {
+                this.setState(currentState => {
                     return {
-                        voteChange: prevState.voteChange + num
+                        voteChange: currentState.voteChange + num
                     };
                 });
             }).catch((err) => {

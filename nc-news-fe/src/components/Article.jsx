@@ -3,10 +3,6 @@ import { Link, Router } from '@reach/router';
 import ArticleComments from './ArticleComments';
 import * as api from './api'
 import ErrorPage from './ErrorPage'
-// import CommentForm from './CommentForm';
-
-
-
 
 class Article extends Component {
 
@@ -18,8 +14,6 @@ class Article extends Component {
         hasError: false,
 
     }
-
-
 
     componentDidMount() {
         api.fetchArticle(this.props.article_id).then(res => {
@@ -34,15 +28,13 @@ class Article extends Component {
 
         api.fetchingVotes(this.props.article_id, num)
             .then(res => {
-                this.setState(prevState => {
-
+                this.setState(currentState => {
                     return {
-                        voteChange: prevState.voteChange + num,
+                        voteChange: currentState.voteChange + num
                     };
-                })
+                });
             })
             .catch((err) => {
-                console.dir(err, 'articlevotes err')
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
@@ -53,12 +45,9 @@ class Article extends Component {
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
         }
-
         if (hasError) {
-
             return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
-
 
         return (
             <div>
@@ -77,7 +66,6 @@ class Article extends Component {
                         Comments: {article.comment_count}<br></br><br></br>
                         <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
                     </p>
-
                     <Router>
                         <ArticleComments path="/comments" loggedInUser={this.props.loggedInUser} isLoggedIn={this.props.isLoggedIn} />
                     </Router>
