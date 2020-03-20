@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment'
-import * as api from './api'
+import * as api from '../api'
 import ErrorPage from './ErrorPage'
 
 

@@ -3,29 +3,29 @@ import React, { Component } from 'react';
 class SortArticles extends Component {
     state = {
         author: '',
-        topic: ''
     }
 
 
-    handleFilterInput = (field, input) => {
+    handleFilterInput = (filterAuthor) => {
+        console.log(filterAuthor)
+        this.setState({ author: filterAuthor })
 
-        this.setState({ [field]: input })
+        const { filterArticles } = this.props;
+
+        filterArticles(filterAuthor);
     }
 
     handleSubmit = event => {
-
         event.preventDefault();
 
         const { filterArticles } = this.props;
 
         filterArticles(this.state);
-        this.setState({ author: '', topic: '' })
+        this.setState({ author: '' })
     };
 
 
-
     render() {
-
         return (
             <div>
                 sort:
@@ -35,8 +35,6 @@ class SortArticles extends Component {
                     <option value='comment_count'>Comment count</option>
                     <option value='votes'>Votes</option>
                 </select>
-                <br></br>
-                <br></br>
 
                 order:
  <select onChange={(e) => { this.props.handleOrder(e.target.value) }}  >
@@ -46,31 +44,23 @@ class SortArticles extends Component {
                 </select>
                 <br></br>
                 <br></br>
-                filter through the articles, input a topic or an author here:
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Author:{' '}
-                        <input
-                            value={this.state.author}
-                            type="text"
-                            onChange={event => {
-                                this.handleFilterInput('author', event.target.value);
-                            }}
-                        />
-                        Topic:{' '}
-                        <input
-                            value={this.state.topic}
-                            type="text"
-                            onChange={event => {
-                                this.handleFilterInput('topic', event.target.value);
-                            }}
-                        />
-                        <button type="submit">Submit</button>
-                    </label>
-                    <button onClick={this.props.clearFilters}>Clear filters</button>
-                </form>
 
-            </div>
+                Filter through the articles, input a topic and an author here:<br></br>
+                Author:
+                <select className='drop-down' onClick={(e) => { this.handleFilterInput(e.target.value) }}  >
+                    <option value=''>Select</option>
+                    <option value='tickle122'>tickle122</option>
+                    <option value='grumpy19'>grumpy19</option>
+                    <option value='happyamy2016'>happyamy2016</option>
+                    <option value='cooljmessy'>cooljmessy</option>
+                    <option value='weegembump'>weegembump</option>
+                    <option value='jessjelly'>jessjelly</option>
+                </select>
+
+
+                <br></br><br></br>
+                <button onClick={this.props.clearFilters}>Clear filters</button>
+            </div >
         );
     }
 }

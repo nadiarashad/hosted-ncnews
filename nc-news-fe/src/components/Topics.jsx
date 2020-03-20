@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import * as api from './api';
+import * as api from '../api';
 import ErrorPage from './ErrorPage'
 
 
@@ -22,16 +22,14 @@ class Topics extends Component {
             }).catch((err) => {
                 this.setState({ isLoading: false, hasError: { msg: err.response.data.msg, status: err.response.data.status } })
             })
-
     }
 
-    handleClick = (value) => {
-        const { articles } = this.props
+    handleClick = (topic) => {
 
-        this.setState(currentState => {
-            return { articles: articles.filter(article => article.topic === value), gotArticles: true }
-        })
-
+        api.handleTopicsByArticle(topic)
+            .then(res => {
+                this.setState({ articles: res.data.articles })
+            })
     }
 
 
@@ -63,7 +61,7 @@ class Topics extends Component {
                     })
                     }
                 </ul>
-                <br></br><br></br>
+                <br></br> <br></br>
                 <ul>
                     {articles.map(article => {
                         return (
@@ -75,8 +73,6 @@ class Topics extends Component {
                         )
                     })}
                 </ul>
-
-
             </div >
         );
     }

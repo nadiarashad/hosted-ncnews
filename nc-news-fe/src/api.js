@@ -28,8 +28,10 @@ export const handlingOrder = (value) => {
     return Axios.get(`${BaseURL}/articles?order=${value}`, { params: { value } })
 }
 
-export const handleFilter = (value, tofilterby) => {
-    return Axios.get(`${BaseURL}/articles?${tofilterby}=${value}`, { params: { value } })
+export const handleFilter = (tofilterby) => {
+    console.log(tofilterby, 'in handle filter')
+    console.log('in api request')
+    return Axios.get(`${BaseURL}/articles?author=${tofilterby}`, { params: { tofilterby } })
 
 }
 
@@ -58,4 +60,9 @@ export const handlingDelete = (props) => {
 
 export const fetchAllTopics = () => {
     return Axios.get("https://nc-news-heroku.herokuapp.com/api/topics")
+}
+
+
+export const handleTopicsByArticle = (topic) => {
+    return Axios.get(`${BaseURL}articles?topic=${topic}`)
 }

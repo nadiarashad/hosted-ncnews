@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Router } from '@reach/router';
 import ArticleComments from './ArticleComments';
-import * as api from './api'
+import * as api from '../api'
 import ErrorPage from './ErrorPage'
 import Button from 'react-bootstrap/Button'
 

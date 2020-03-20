@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import SortArticles from './SortArticles';
 import moment from 'moment'
-import * as api from './api';
+import * as api from '../api';
 import ErrorPage from './ErrorPage'
-// import Axios from 'axios'
+
 
 class AllArticles extends Component {
 
@@ -18,7 +18,6 @@ class AllArticles extends Component {
         api.fetchAllArticles().then(res => {
             this.setState({ articles: res.data.articles, isLoading: false });
         }).catch((err) => {
-            console.dir(err, 'all articles err')
             this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
         })
     };
@@ -37,28 +36,26 @@ class AllArticles extends Component {
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             }).catch((err) => {
-
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
 
     filterArticles = (value) => {
-        const topic = value.topic
-        const author = value.author
+        // const topic = value.topic
 
-        if (topic) {
-            api.handleFilter(topic, 'topic')
-                .then(res => {
-                    this.setState({ articles: res.data.articles, isLoading: false })
-                })
-        }
 
-        if (author) {
-            api.handleFilter(author, 'author')
-                .then(res => {
-                    this.setState({ articles: res.data.articles, isLoading: false })
-                })
-        }
+        // if (topic) {
+        //     api.handleFilter(topic, 'topic')
+        //         .then(res => {
+        //             this.setState({ articles: res.data.articles, isLoading: false })
+        //         })
+        // }
+
+
+        api.handleFilter(value)
+            .then(res => {
+                this.setState({ articles: res.data.articles, isLoading: false })
+            })
     }
 
     clearFilters = () => {
@@ -68,6 +65,9 @@ class AllArticles extends Component {
 
     render() {
         const { articles, isLoading, hasError } = this.state
+        // console.log(this.props, 'article props')
+
+        const { users } = this.props
 
         if (isLoading === true) {
             return <p>Is Loading ...</p>;
@@ -83,7 +83,7 @@ class AllArticles extends Component {
                 <br>
                 </br>
                 <h2>All articles</h2>
-                <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} clearFilters={this.clearFilters} />
+                <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} clearFilters={this.clearFilters} users={users} />
                 <br></br>
                 <ul className={StyleSheet.articleTable}>
                     {articles.map(article => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios'
 import CommentForm from './CommentForm';
 import moment from 'moment';
-import * as api from './api';
+import * as api from '../api';
 import ErrorPage from './ErrorPage'
 import Button from 'react-bootstrap/Button'
 

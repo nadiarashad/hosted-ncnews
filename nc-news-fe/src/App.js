@@ -10,7 +10,7 @@ import Topics from './components/Topics'
 import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 import Axios from 'axios';
-import * as api from './components/api';
+import * as api from './api';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -56,7 +56,7 @@ class App extends Component {
 
 
   render() {
-    const { loggedInUser } = this.state
+    const { loggedInUser, users } = this.state
     return (
       <div className="App" >
 
@@ -69,9 +69,9 @@ class App extends Component {
 
         <Router>
           <Home path="/" />
-          <AllArticles path="/articles/*" />
+          <AllArticles path="/articles/*" users={users} />
           <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} articles={this.state.articles} />
-          <Topics path="/topics/*" articles={this.state.articles} />
+          <Topics path="/topics/" articles={this.state.articles} />
           <AllComments path="/comments" />
           <ErrorPage default status={404} msg={'Page not found'} />
 
