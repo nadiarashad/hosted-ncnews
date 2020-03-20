@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
   /* display: grid; */
@@ -52,15 +53,12 @@
 h2 {
 
   color: red;
-;
-
 }
 
-p {
-  
+p { 
 text-align: center;
    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
    color: #112d32;
    text-decoration: none;
-
 }
+

@@ -11,6 +11,8 @@ import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 import Axios from 'axios';
 import * as api from './components/api';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 class App extends Component {
 
@@ -57,6 +59,7 @@ class App extends Component {
     const { loggedInUser } = this.state
     return (
       <div className="App" >
+
 
         <Header loggedInUser={loggedInUser} logInUser={this.logInUser} validUser={this.validUser} />
         <Nav />

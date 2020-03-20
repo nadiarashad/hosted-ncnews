@@ -4,6 +4,7 @@ import CommentForm from './CommentForm';
 import moment from 'moment';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
+import Button from 'react-bootstrap/Button'
 
 class ArticleComments extends Component {
 
@@ -112,7 +113,8 @@ class ArticleComments extends Component {
                                     Let us know what you thought of the comment by clicking on the buttons below...<br></br><br></br>
 
                                     {voteError !== false && <p>Error. can not vote</p>}
-                                    <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
+                                    <>
+                                        <Button variant='success' disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</Button>{' '}</>  <><Button variant='danger' disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</Button>{' '}</>
                                     <br></br><br></br>
 
                                     {loggedInUser &&

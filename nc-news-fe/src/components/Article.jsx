@@ -3,6 +3,7 @@ import { Link, Router } from '@reach/router';
 import ArticleComments from './ArticleComments';
 import * as api from './api'
 import ErrorPage from './ErrorPage'
+import Button from 'react-bootstrap/Button'
 
 class Article extends Component {
 
@@ -60,7 +61,8 @@ class Article extends Component {
                         {article.body}<br></br><br></br>
                         Current votes: {article.votes + voteChange}<br></br><br></br>
                         Let us know what you thought of this article by clicking on the buttons below...<br></br><br></br>
-                        <button disabled={voteChange !== 0} onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
+                        <>
+                            <Button variant="success" disabled={voteChange !== 0} onClick={() => this.handleVoteUpdates(1)}>{'😀'}</Button>{' '} </> <><Button variant="danger" disabled={voteChange !== 0} onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</Button>{' '}</>
 
                         <br></br><br></br>
                         Comments: {article.comment_count}<br></br><br></br>
