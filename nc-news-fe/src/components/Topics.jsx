@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Router, Link } from '@reach/router';
+import { Link } from '@reach/router';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
-// import AllArticlesForTopic from './AllArticlesForTopic';
 
 
 class Topics extends Component {
@@ -27,8 +26,6 @@ class Topics extends Component {
     }
 
     handleClick = (value) => {
-        console.log('in handle click')
-        console.log(value, 'value')
         const { articles } = this.props
 
         this.setState(currentState => {
@@ -39,15 +36,12 @@ class Topics extends Component {
 
 
     render() {
-        console.log(this.state, 'this.state')
-        // console.log(this.props, 'topics props')
         const { topics, isLoading, hasError, articles } = this.state
 
         if (isLoading === true) {
             return <h1>is loading...</h1>
         }
         if (hasError) {
-
             return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
         return (
@@ -69,8 +63,6 @@ class Topics extends Component {
                     })
                     }
                 </ul>
-
-
                 <br></br><br></br>
                 <ul>
                     {articles.map(article => {

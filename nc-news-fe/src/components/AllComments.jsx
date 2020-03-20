@@ -23,7 +23,6 @@ class AllComments extends Component {
 
     render() {
         const { comments, isLoading, hasError } = this.state
-        console.log(this.state, 'comments state')
 
         if (isLoading === true) {
             return <h2>Page Loading ...</h2>

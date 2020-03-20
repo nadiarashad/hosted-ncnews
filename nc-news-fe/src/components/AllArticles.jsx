@@ -28,7 +28,6 @@ class AllArticles extends Component {
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             }).catch((err) => {
-                console.dir(err, 'handling sort err')
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
@@ -38,7 +37,7 @@ class AllArticles extends Component {
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
             }).catch((err) => {
-                console.dir(err, 'handling order err')
+
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
@@ -68,7 +67,6 @@ class AllArticles extends Component {
 
 
     render() {
-        // console.log(this.props, 'article props')
         const { articles, isLoading, hasError } = this.state
 
         if (isLoading === true) {

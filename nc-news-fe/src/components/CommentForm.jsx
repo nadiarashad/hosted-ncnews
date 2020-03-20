@@ -23,8 +23,7 @@ class AddComment extends Component {
     };
 
     render() {
-        console.log(this.state)
-        console.log(this.props, 'comment form props')
+
         return (
             <div>
                 <h2>Have something to say? Add a comment here!</h2>

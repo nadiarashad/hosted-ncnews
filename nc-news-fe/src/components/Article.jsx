@@ -47,15 +47,8 @@ class Article extends Component {
             })
     }
 
-
-
-
     render() {
         const { isLoading, article, voteChange, hasError } = this.state
-
-        console.log(this.state, 'state of article comments')
-        // console.log(this.props, 'props')
-
 
         if (isLoading === true) {
             return <h1>Is Loading ...</h1>;
@@ -85,14 +78,11 @@ class Article extends Component {
                         <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
                     </p>
 
-
                     <Router>
                         <ArticleComments path="/comments" loggedInUser={this.props.loggedInUser} isLoggedIn={this.props.isLoggedIn} />
                     </Router>
 
-
                 </ul>
-
             </div >
         );
     }

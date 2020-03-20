@@ -6,13 +6,10 @@ import { Router } from '@reach/router';
 import Nav from './components/nav';
 import AllArticles from './components/AllArticles'
 import Article from './components/Article'
-// import ArticleComments from './components/ArticleComments'
 import Topics from './components/Topics'
-// import Footer from './components/Footer'
 import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 import Axios from 'axios';
-// import AllArticlesForTopic from './components/AllArticlesForTopic'
 import * as api from './components/api';
 
 class App extends Component {
@@ -57,7 +54,6 @@ class App extends Component {
 
 
   render() {
-    // console.log(this.state, 'app state')
     const { loggedInUser } = this.state
     return (
       <div className="App" >
@@ -72,10 +68,8 @@ class App extends Component {
           <Home path="/" />
           <AllArticles path="/articles/*" />
           <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} articles={this.state.articles} />
-          {/* <ArticleComments path="/articles/:article_id/comments" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} /> */}
           <Topics path="/topics/*" articles={this.state.articles} />
           <AllComments path="/comments" />
-          {/* <AllArticlesForTopic path="/articles/:topic" /> */}
           <ErrorPage default status={404} msg={'Page not found'} />
 
         </Router>

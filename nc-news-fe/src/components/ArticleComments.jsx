@@ -80,8 +80,6 @@ class ArticleComments extends Component {
         const { comments, isLoading, voteChange, voteError, hasError } = this.state
         const { loggedInUser } = this.props
 
-        console.log(this.state)
-
         if (isLoading === true) {
             return <h2>Loading page...</h2>
         }
