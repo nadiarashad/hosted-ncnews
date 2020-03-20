@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-//add comment only if logged in user is jessjelly
+
 
 class AddComment extends Component {
     state = {

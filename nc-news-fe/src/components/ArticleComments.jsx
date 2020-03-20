@@ -41,14 +41,14 @@ class ArticleComments extends Component {
     }
 
 
-    handleDelete = (props) => {
+    handleDelete = (comment_id) => {
 
-        api.handlingDelete(props)
+        api.handlingDelete(comment_id)
             .then(res => {
 
                 this.setState(currentState => {
                     return {
-                        comments: currentState.comments.filter(comment => comment.comment_id !== props)
+                        comments: currentState.comments.filter(comment => comment.comment_id !== comment_id)
                     }
                 })
             }).catch((err) => {
@@ -79,6 +79,7 @@ class ArticleComments extends Component {
         const { comments, isLoading, voteChange, voteError, hasError } = this.state
         const { loggedInUser } = this.props
 
+        console.log(this.state)
 
         if (isLoading === true) {
             return <h2>Loading page...</h2>
@@ -90,6 +91,10 @@ class ArticleComments extends Component {
         return (
             <div>
 
+                {loggedInUser && (
+                    < CommentForm postComment={this.postComment} />
+                )}
+
                 <br></br>
 
                 <h3>All comments are below..</h3>
@@ -97,6 +102,8 @@ class ArticleComments extends Component {
                 <ul>
                     {comments.map(comment => {
                         return (
+
+
                             <li key={comment.comment_id}> <br></br>
 
                                 <p> Comment by: {comment.author}<br></br>
@@ -111,9 +118,11 @@ class ArticleComments extends Component {
                                     <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
                                     <br></br><br></br>
 
-                                    {loggedInUser && (
-                                        < CommentForm postComment={this.state.postComment} />
-                                    )}
+                                    {/* {loggedInUser && */}
+                                    <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
+                                    {/* } */}
+
+
                                 </p>
                             </li>
                         )

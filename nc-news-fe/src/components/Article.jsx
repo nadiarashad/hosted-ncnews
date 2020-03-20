@@ -84,7 +84,8 @@ class Article extends Component {
 
 
                     <Router>
-                        <ArticleComments path="/comments" />
+
+                        <ArticleComments path="/comments" loggedInUser={this.props.loggedInUser} isLoggedIn={this.props.isLoggedIn} />
                     </Router>
 
 
