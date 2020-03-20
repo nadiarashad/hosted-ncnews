@@ -3,7 +3,8 @@ import { Link, Router } from '@reach/router';
 import ArticleComments from './ArticleComments';
 import * as api from './api'
 import ErrorPage from './ErrorPage'
-import CommentForm from './CommentForm';
+// import CommentForm from './CommentForm';
+
 
 
 
@@ -44,10 +45,13 @@ class Article extends Component {
     }
 
 
+
+
     render() {
         const { isLoading, article, voteChange, hasError } = this.state
-        const { loggedInUser } = this.props
 
+
+        // console.log(this.props, 'props')
 
 
         if (isLoading === true) {
@@ -78,9 +82,7 @@ class Article extends Component {
                         <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
                     </p>
 
-                    {loggedInUser && (
-                        < CommentForm postComment={this.props.postComment} />
-                    )}
+
                     <Router>
                         <ArticleComments path="/comments" />
                     </Router>

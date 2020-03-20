@@ -6,7 +6,7 @@ import { Router } from '@reach/router';
 import Nav from './components/nav';
 import AllArticles from './components/AllArticles'
 import Article from './components/Article'
-import ArticleComments from './components/ArticleComments'
+// import ArticleComments from './components/ArticleComments'
 import Topics from './components/Topics'
 // import Footer from './components/Footer'
 import AllComments from './components/AllComments'

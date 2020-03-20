@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
-// import CommentForm from './CommentForm';
+import CommentForm from './CommentForm';
 import moment from 'moment';
 import * as api from './api';
 import ErrorPage from './ErrorPage'
@@ -15,23 +15,6 @@ class ArticleComments extends Component {
         voteError: false
     }
 
-    postComment = newComment => {
-
-        const { username, body } = newComment
-
-        return Axios.post(
-            `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
-            { username, body })
-
-            .then(res => {
-                this.setState(currentState => {
-                    return { comments: [res.data.comment, ...currentState.comments] };
-                });
-            })
-            .catch((err) => {
-                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
-            })
-    };
 
     componentDidMount() {
         api.fetchCommentsPerID(this.props.article_id)
@@ -73,9 +56,29 @@ class ArticleComments extends Component {
             })
     }
 
+    postComment = newComment => {
+
+        const { username, body } = newComment
+
+        return Axios.post(
+            `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
+            { username, body })
+
+            .then(res => {
+                this.setState(currentState => {
+                    return { comments: [res.data.comment, ...currentState.comments] };
+                });
+            })
+            .catch((err) => {
+                this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
+            })
+    };
+
 
     render() {
         const { comments, isLoading, voteChange, voteError, hasError } = this.state
+        const { loggedInUser } = this.props
+
 
         if (isLoading === true) {
             return <h2>Loading page...</h2>
@@ -108,7 +111,9 @@ class ArticleComments extends Component {
                                     <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</button>  <button disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</button>
                                     <br></br><br></br>
 
-
+                                    {loggedInUser && (
+                                        < CommentForm postComment={this.state.postComment} />
+                                    )}
                                 </p>
                             </li>
                         )

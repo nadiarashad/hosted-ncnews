@@ -18,12 +18,13 @@ class AddComment extends Component {
         event.preventDefault();
         const { postComment } = this.props;
 
-
         postComment(this.state);
         this.setState({ username: '', body: '' })
     };
 
     render() {
+        console.log(this.state)
+        console.log(this.props, 'comment form props')
         return (
             <div>
                 <h2>Have something to say? Add a comment here!</h2>
