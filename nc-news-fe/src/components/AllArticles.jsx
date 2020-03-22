@@ -41,16 +41,6 @@ class AllArticles extends Component {
     }
 
     filterArticles = (value) => {
-        // const topic = value.topic
-
-
-        // if (topic) {
-        //     api.handleFilter(topic, 'topic')
-        //         .then(res => {
-        //             this.setState({ articles: res.data.articles, isLoading: false })
-        //         })
-        // }
-
 
         api.handleFilter(value)
             .then(res => {
@@ -92,7 +82,7 @@ class AllArticles extends Component {
                                 <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
                                 <p>
                                     Author: {article.author}<br></br>
-                                    ID: {article.article_id}<br></br>
+                                    {/* ID: {article.article_id}<br></br> */}
                                     Topic: {article.topic} <br></br>
                                     Created: {moment(article.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
                                     Current votes: {article.votes}<br></br>

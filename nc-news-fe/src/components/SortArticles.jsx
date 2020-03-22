@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button'
 
 class SortArticles extends Component {
     state = {
@@ -28,16 +29,16 @@ class SortArticles extends Component {
     render() {
         return (
             <div>
-                sort:
-                    <select onChange={(e) => { this.props.handleSort(e.target.value) }}  >
+                <p>sort:</p>
+                <select onChange={(e) => { this.props.handleSort(e.target.value) }}  >
                     <option>Select</option>
                     <option value='created_at'>Date</option>
                     <option value='comment_count'>Comment count</option>
                     <option value='votes'>Votes</option>
                 </select>
-
-                order:
- <select onChange={(e) => { this.props.handleOrder(e.target.value) }}  >
+                <br></br> <br></br>
+                <p>order:</p>
+                <select onChange={(e) => { this.props.handleOrder(e.target.value) }}  >
                     <option>Select</option>
                     <option value='asc'>Ascending</option>
                     <option value='desc'>Descending</option>
@@ -45,8 +46,8 @@ class SortArticles extends Component {
                 <br></br>
                 <br></br>
 
-                Filter through the articles, input a topic and an author here:<br></br>
-                Author:
+                <p>Filter through the articles, input a topic and an author here:</p>
+                <p>Author:</p>
                 <select className='drop-down' onClick={(e) => { this.handleFilterInput(e.target.value) }}  >
                     <option value=''>Select</option>
                     <option value='tickle122'>tickle122</option>
@@ -59,7 +60,7 @@ class SortArticles extends Component {
 
 
                 <br></br><br></br>
-                <button onClick={this.props.clearFilters}>Clear filters</button>
+                <Button variant='dark' onClick={this.props.clearFilters}>Clear filters</Button>{' '}
             </div >
         );
     }

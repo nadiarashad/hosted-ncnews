@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button'
 
 class LogInForm extends Component {
     state = {
         username: '',
+        loggedOut: false
     }
 
     handleInput = (field, input) => {
@@ -19,32 +21,61 @@ class LogInForm extends Component {
         this.setState({ username: '' })
     }
 
+    clickLogout = () => {
+        this.setState({ loggedOut: true })
+    }
+
 
     render() {
         const { loggedInUser } = this.props
+        const { loggedOut } = this.state
+
+
+
         return (
             <div>
 
-                {loggedInUser !== null ? (
-                    <p>Logged in user: {loggedInUser}</p>
-                ) : (
-                        <p>Not logged in</p>
-                    )}
+                {loggedInUser === null || loggedOut === true ? (
 
-                <p>Log into your account here...</p> <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:{' '}
-                        <input
-                            type="text"
-                            value={this.state.username}
-                            onChange={event => { this.handleInput('username', event.target.value) }}
-                        />
-                        <button  >Log in</button>
-                    </label>
-                </form>
+                    <div>
+                        <p>Not logged in</p>
+
+                        <p>Log into your account here...</p>
+
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                Username:{' '}
+                                <input
+                                    type="text"
+                                    value={this.state.username}
+                                    onChange={event => { this.handleInput('username', event.target.value) }}
+                                />
+                                <Button variant='dark' >Log in</Button>{' '}
+                            </label>
+                        </form>
+                    </div>
+
+
+                ) : (
+
+                        <div>
+                            <p>Logged in user: {loggedInUser}</p>
+
+
+                            <Button color="light" onClick={this.clickLogout}>
+                                {loggedInUser ? 'Logout' : 'Login'}
+                            </Button>
+
+                        </div>
+
+                    )
+                }
+
             </div>
+
         );
     }
 }
 
 export default LogInForm;
+
