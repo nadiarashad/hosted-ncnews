@@ -92,7 +92,7 @@ class ArticleComments extends Component {
             <div>
 
                 {loggedInUser && (
-                    < CommentForm postComment={this.postComment} />
+                    < CommentForm postComment={this.postComment} loggedInUser={this.props.loggedInUser} />
                 )}
 
                 <br></br>

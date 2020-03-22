@@ -23,7 +23,9 @@ class AddComment extends Component {
     };
 
     render() {
+        console.log(this.props, 'props in commentform')
 
+        const { loggedInUser } = this.props
         return (
             <div>
                 <h2>Have something to say? Add a comment here!</h2>
@@ -47,7 +49,7 @@ class AddComment extends Component {
                                 this.handleInput('body', event.target.value);
                             }}
                         />
-                        <button disabled={!this.state.username || !this.state.body} type="submit" >Submit</button>
+                        <button disabled={this.state.username !== loggedInUser || !this.state.body} type="submit" >Submit</button>
                     </label>
                 </form>
             </div>

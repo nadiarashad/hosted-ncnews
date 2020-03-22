@@ -6,12 +6,11 @@ import LogInForm from './LogInForm';
 const Header = ({ loggedInUser, logInUser }) => {
     return (
         <div>
-            {/* <img className='headerbanner' src={Logo} alt='banner of newyork skyline' /> */}
 
             <br></br>
             <LogInForm loggedInUser={loggedInUser} logInUser={logInUser} />
             <br />
-            <h1 className="title">NC - News</h1>
+            <h1 className="title">Northcoders News</h1>
             <br></br>
         </div>
     );

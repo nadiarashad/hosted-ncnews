@@ -35,7 +35,7 @@ font-family: 'Nunito Sans', sans-serif;
 
 .header-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr  ;
     grid-template-columns: ;
     grid-gap: 10px; 
     width: 80vh;

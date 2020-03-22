@@ -49,13 +49,14 @@ class Topics extends Component {
                     {topics.map(topic => {
                         return (
                             <li key={topic.slug}>
-                                <h2>{topic.slug}</h2>
+                                <h3>{topic.slug}</h3>
 
                                 <p>
                                     {topic.description}
 
                                 </p>
                                 <button value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles here</button>
+                                <br></br><br></br>
                             </li>
                         )
                     })
