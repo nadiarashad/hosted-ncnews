@@ -37,7 +37,7 @@ font-family: 'Permanent Marker', cursive
 .header-grid {
     display: grid;
     grid-template-columns: 1fr 1fr  ;
-    grid-template-columns: ;
+    /* grid-template-columns: ; */
     grid-gap: 10px; 
     width: 80vh;
     height: 0.5vh;
