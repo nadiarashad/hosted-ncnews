@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
+import SortArticlesForm from './sortArticlesForm';
+import OrderArticles from './OrderArticlesForm'
+// import FilterArticlesForm from './FilterArticlesForm'
+
 
 class SortArticles extends Component {
     state = {
@@ -8,7 +12,6 @@ class SortArticles extends Component {
 
 
     handleFilterInput = (filterAuthor) => {
-        console.log(filterAuthor)
         this.setState({ author: filterAuthor })
 
         const { filterArticles } = this.props;
@@ -29,22 +32,8 @@ class SortArticles extends Component {
     render() {
         return (
             <div>
-                <p>sort:</p>
-                <select onChange={(e) => { this.props.handleSort(e.target.value) }}  >
-                    <option>Select</option>
-                    <option value='created_at'>Date</option>
-                    <option value='comment_count'>Comment count</option>
-                    <option value='votes'>Votes</option>
-                </select>
-                <br></br> <br></br>
-                <p>order:</p>
-                <select onChange={(e) => { this.props.handleOrder(e.target.value) }}  >
-                    <option>Select</option>
-                    <option value='asc'>Ascending</option>
-                    <option value='desc'>Descending</option>
-                </select>
-                <br></br>
-                <br></br>
+                <SortArticlesForm handleSort={this.props.handleSort} />
+                <OrderArticles handleOrder={this.props.handleOrder} />
 
                 <p>Filter through the articles, input a topic and an author here:</p>
                 <p>Author:</p>
@@ -59,7 +48,7 @@ class SortArticles extends Component {
                 </select>
 
 
-                <br></br><br></br>
+                <br></br> <br></br>
                 <Button variant='dark' onClick={this.props.clearFilters}>Clear filters</Button>{' '}
             </div >
         );

@@ -1,0 +1,33 @@
+.AllArticles {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+    
+}
+
+.Articles {
+    width: 23em;
+    margin-left: 1em;
+    margin-right: 1em ;
+    border: solid grey;
+    border-width: 0.2em;
+    margin-bottom: 1em;
+    display: grid;
+    grid-template: 3fr 1fr;
+    grid-template-areas:  3fr 1fr;
+}
+
+.ArticleUL {
+  list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+
+}
+
+p {
+    color: maroon;
+}

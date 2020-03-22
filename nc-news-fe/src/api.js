@@ -29,10 +29,7 @@ export const handlingOrder = (value) => {
 }
 
 export const handleFilter = (tofilterby) => {
-    console.log(tofilterby, 'in handle filter')
-    console.log('in api request')
     return Axios.get(`${BaseURL}/articles?author=${tofilterby}`, { params: { tofilterby } })
-
 }
 
 export const fetchAllComments = () => {

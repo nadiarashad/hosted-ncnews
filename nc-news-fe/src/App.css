@@ -2,11 +2,11 @@
 .App {
   text-align: center;
   /* display: grid; */
-  background-color: aliceblue;
+  background-color: whitesmoke;
 /* font-family: 'Baloo Chettan 2', cursive;
 font-family: 'Baloo Chettan 2', cursive;
 font-family: 'Bellota Text', cursive; */
-font-family: 'Nunito Sans', sans-serif;
+font-family: 'Permanent Marker', cursive
 }
 
 /* #282c34 */
@@ -20,11 +20,12 @@ font-family: 'Nunito Sans', sans-serif;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
 }
 
 .nav-button {
     background-color: #7395ae;
-    color: black;
+    color: maroon;
     font-weight: none;
     text-align: center;
     border: 10px solid #7395ae;
@@ -57,24 +58,26 @@ font-family: 'Nunito Sans', sans-serif;
 
 h2 {
 
-  color: red;
+  color: black;
   font-weight: bold;
 }
 
 h1 {
+color: red;
 
 }
 
 h3 {
   font-weight: bold;
+  color: black;
 }
 
 p { 
 text-align: center;
-   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   color: #112d32;
+font-family: 'Permanent Marker', cursive;
+   color: darkslategrey;
    text-decoration: none;
-   font-weight: bold;
+
 }
 
 headerbanner {

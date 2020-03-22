@@ -4,6 +4,8 @@ import SortArticles from './SortArticles';
 import moment from 'moment'
 import * as api from '../api';
 import ErrorPage from './ErrorPage'
+import styles from '../cssFiles/AllArticles.module.css'
+
 
 
 class AllArticles extends Component {
@@ -16,8 +18,10 @@ class AllArticles extends Component {
 
     componentDidMount() {
         api.fetchAllArticles().then(res => {
+
             this.setState({ articles: res.data.articles, isLoading: false });
         }).catch((err) => {
+
             this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
         })
     };
@@ -41,7 +45,6 @@ class AllArticles extends Component {
     }
 
     filterArticles = (value) => {
-
         api.handleFilter(value)
             .then(res => {
                 this.setState({ articles: res.data.articles, isLoading: false })
@@ -55,8 +58,6 @@ class AllArticles extends Component {
 
     render() {
         const { articles, isLoading, hasError } = this.state
-        // console.log(this.props, 'article props')
-
         const { users } = this.props
 
         if (isLoading === true) {
@@ -64,7 +65,6 @@ class AllArticles extends Component {
         }
 
         if (hasError) {
-
             return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
 
@@ -74,21 +74,23 @@ class AllArticles extends Component {
                 </br>
                 <h2>All articles</h2>
                 <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} clearFilters={this.clearFilters} users={users} />
+
                 <br></br>
-                <ul className={StyleSheet.articleTable}>
+                <ul className={styles.AllArticles}>
                     {articles.map(article => {
                         return (
-                            <li key={article.article_id}>
+                            <li className={styles.Articles} key={article.article_id}>
                                 <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
                                 <p>
                                     Author: {article.author}<br></br>
-                                    {/* ID: {article.article_id}<br></br> */}
                                     Topic: {article.topic} <br></br>
                                     Created: {moment(article.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
                                     Current votes: {article.votes}<br></br>
                                     Comment count: {article.comment_count}
                                 </p>
+                                <br></br> <br></br>
                             </li>
+
                         )
                     })}
                 </ul>

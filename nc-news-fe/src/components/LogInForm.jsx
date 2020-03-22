@@ -18,7 +18,7 @@ class LogInForm extends Component {
         event.preventDefault()
 
         logInUser(username)
-        this.setState({ username: '' })
+        this.setState({ username: '', loggedOut: false })
     }
 
     clickLogout = () => {

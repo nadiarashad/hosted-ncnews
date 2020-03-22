@@ -8,9 +8,6 @@ const Nav = () => {
 
             <Link className="nav-button" to="/">Home</Link>
             <Link className="nav-button" to="/articles">Articles</Link>
-            {/* <Link className="nav-button" to="/comments">Comments</Link> */}
-            {/* <Link className="nav-button" to="/topics">Topics</Link> */}
-
             <br></br>
             <br></br>
             <br></br>

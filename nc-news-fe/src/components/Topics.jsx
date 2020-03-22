@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import * as api from '../api';
 import ErrorPage from './ErrorPage'
+import styles from '../cssFiles/AllArticles.module.css'
 
 
 class Topics extends Component {
@@ -45,17 +46,17 @@ class Topics extends Component {
         return (
             <div>
 
-                <ul>
+                <ul className={styles.AllArticles}>
                     {topics.map(topic => {
                         return (
-                            <li key={topic.slug}>
+                            <li className={styles.Articles} key={topic.slug}>
                                 <h3>{topic.slug}</h3>
 
                                 <p>
                                     {topic.description}
 
                                 </p>
-                                <button value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles here</button>
+                                <button value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</button>
                                 <br></br><br></br>
                             </li>
                         )
@@ -63,13 +64,13 @@ class Topics extends Component {
                     }
                 </ul>
                 <br></br> <br></br>
-                <ul>
+                <ul className={styles.AllArticles}>
                     {articles.map(article => {
                         return (
-                            <li key={article.article_id}>
+                            <li className={styles.Articles} key={article.article_id}>
                                 <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
                                 Author: {article.author} <br></br><br></br>
-                                Topic: {article.topic}<br></br><br></br>
+
                             </li>
                         )
                     })}
