@@ -1,11 +1,6 @@
 import React from 'react';
 
-
-
-
-
 const SortArticlesForm = (props) => {
-
     return (
         <div>
             <p>sort:</p>
@@ -17,7 +12,6 @@ const SortArticlesForm = (props) => {
             </select>
             <br></br> <br></br>
         </div>
-
     );
 };
 

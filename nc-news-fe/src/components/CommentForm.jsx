@@ -41,9 +41,7 @@ class AddComment extends Component {
                     </label>
                 </form>
             </div>
-
         );
-
     }
 }
 

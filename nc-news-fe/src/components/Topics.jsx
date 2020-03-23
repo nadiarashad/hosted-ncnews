@@ -39,7 +39,6 @@ class Topics extends Component {
     }
 
     handleClick = (topic) => {
-
         api.handleTopicsByArticle(topic)
             .then(res => {
                 this.setState({ articles: res.data.articles })
@@ -54,6 +53,7 @@ class Topics extends Component {
                 this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
+
     handleOrder = (value) => {
         api.handlingOrder(value)
             .then(res => {
@@ -64,7 +64,6 @@ class Topics extends Component {
     }
 
     render() {
-        console.log(this.state, 'articlesState')
         const { topics, isLoading, hasError, articles } = this.state
 
         if (isLoading === true) {
@@ -76,7 +75,6 @@ class Topics extends Component {
         return (
 
             <div>
-
                 <ul className={styles.AllArticles}>
                     {topics.map(topic => {
                         return (
@@ -107,7 +105,6 @@ class Topics extends Component {
                                 Created: {moment(article.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
                                 Current votes: {article.votes}<br></br>
                                 Comment count: {article.comment_count}
-
                             </li>
                         )
                     })}

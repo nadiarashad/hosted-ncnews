@@ -95,7 +95,6 @@ class AllArticles extends Component {
                                 </p>
                                 <br></br> <br></br>
                             </li>
-
                         )
                     })}
                 </ul>

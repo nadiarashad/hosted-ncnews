@@ -2,22 +2,16 @@
 .App {
   text-align: center;
   /* display: grid; */
-  /* background-color: whitesmoke; */
-/* font-family: 'Baloo Chettan 2', cursive;
-font-family: 'Baloo Chettan 2', cursive;
-font-family: 'Bellota Text', cursive; */
-/* font-family: 'Permanent Marker', cursive */
-/* font-family: 'Chonburi', cursive; */
+
 font-family: 'Quando', serif;
  background: url("./images/marble-surface-wall-white-1323712.jpg");
     background-size: cover;
     background-position:top;
     background: cover;
-    /* height: max-content; */
-    /* width: max-content; */
+
 }
 
-/* #282c34 */
+
 
 .App-header {
   background-color: #282c34;
@@ -40,18 +34,21 @@ font-family: 'Quando', serif;
     border: 10px solid #7395ae;
     border-radius: 10px;
     text-decoration: none;
+        /* display: flex; */
+    flex-wrap: wrap;
 }
 
 
 .header-grid {
     display: grid;
     grid-template-columns: 1fr 1fr  ;
-    /* grid-template-columns: ; */
+    grid-template-columns: 1fr;
     grid-gap: 10px; 
-    width: 80vh;
+    width: 45vh;
     height: 0.5vh;
     margin: auto;
       text-align: center;
+    flex-wrap: wrap;
 }
 
 .body-sections{

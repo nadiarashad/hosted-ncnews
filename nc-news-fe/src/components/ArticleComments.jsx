@@ -40,7 +40,6 @@ class ArticleComments extends Component {
     }
 
     handleDelete = (comment_id) => {
-
         api.handlingDelete(comment_id)
             .then(res => {
 
@@ -85,7 +84,6 @@ class ArticleComments extends Component {
                 {loggedInUser && (
                     < CommentForm postComment={this.postComment} loggedInUser={this.props.loggedInUser} />
                 )}
-                <br></br>
                 <SingleComment comments={comments} voteError={voteError} voteChange={voteChange} handleVoteUpdates={this.handleVoteUpdates} handleDelete={this.handleDelete} />
             </div >
         );

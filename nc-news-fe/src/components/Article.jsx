@@ -26,7 +26,6 @@ class Article extends Component {
     };
 
     handleVoteUpdates = (num) => {
-
         api.fetchingVotes(this.props.article_id, num)
             .then(res => {
                 this.setState(currentState => {
@@ -52,9 +51,8 @@ class Article extends Component {
 
         return (
             <div>
-
+                <br></br>
                 <ul className={styles.ArticleUL}>
-
                     <h3>{article.title}</h3>
                     <p>
                         Author: {article.author} <br></br><br></br>
@@ -69,11 +67,9 @@ class Article extends Component {
                         Comments: {article.comment_count}<br></br><br></br>
                         <Link to={`/articles/${article.article_id}/comments`} >View comments</Link>
                     </p>
-
                     <Router>
                         <ArticleComments path="/comments" loggedInUser={this.props.loggedInUser} isLoggedIn={this.props.isLoggedIn} />
                     </Router>
-
                 </ul>
             </div >
         );

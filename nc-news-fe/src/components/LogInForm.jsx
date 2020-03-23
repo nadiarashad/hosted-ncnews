@@ -12,7 +12,6 @@ class LogInForm extends Component {
     }
 
     handleSubmit = (event) => {
-        console.log('in handle submit')
         const { logInUser } = this.props
         const { username } = this.state
 
@@ -31,50 +30,34 @@ class LogInForm extends Component {
         const { loggedInUser } = this.props
         const { loggedOut } = this.state
 
-
-
         return (
             <div>
-
                 {loggedInUser === null || loggedOut === true ? (
-
                     <div>
                         <p>Not logged in</p>
-
                         <p>Log into your account here...</p>
-
                         <form onSubmit={this.handleSubmit}>
                             <label>
                                 Username:{' '}
                                 <input
                                     type="text"
                                     value={this.state.username}
-
                                     onChange={event => { this.handleInput('username', event.target.value) }}
                                 />
                                 <button variant='dark' >Log in</button>
                             </label>
                         </form>
                     </div>
-
-
                 ) : (
-
                         <div>
                             <p>Logged in user: {loggedInUser}</p>
-
-
                             <Button color="light" onClick={this.clickLogout}>
                                 {loggedInUser ? 'Logout' : 'Login'}
                             </Button>
-
                         </div>
-
                     )
                 }
-
             </div>
-
         );
     }
 }
