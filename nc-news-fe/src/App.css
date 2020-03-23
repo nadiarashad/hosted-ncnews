@@ -2,13 +2,19 @@
 .App {
   text-align: center;
   /* display: grid; */
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
 /* font-family: 'Baloo Chettan 2', cursive;
 font-family: 'Baloo Chettan 2', cursive;
 font-family: 'Bellota Text', cursive; */
 /* font-family: 'Permanent Marker', cursive */
 /* font-family: 'Chonburi', cursive; */
 font-family: 'Quando', serif;
+ background: url("./images/PaintSwatches_1920x1234.png");
+    background-size: cover;
+    background-position:top;
+    background: cover;
+    /* height: max-content; */
+    /* width: max-content; */
 }
 
 /* #282c34 */
@@ -22,6 +28,7 @@ font-family: 'Quando', serif;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+   text-align: center;
 
 }
 
@@ -44,6 +51,7 @@ font-family: 'Quando', serif;
     width: 80vh;
     height: 0.5vh;
     margin: auto;
+      text-align: center;
 }
 
 .body-sections{
@@ -91,6 +99,7 @@ headerbanner {
     background-size:contain;
     background-position:top;
     background: cover;
+      text-align: center;
 }
 
 .topicsImage {
