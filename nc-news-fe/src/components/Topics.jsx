@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import * as api from '../api';
 import ErrorPage from './ErrorPage'
+import { Button, Card, ListGroup, Container, Row, Col } from 'react-bootstrap'
 import styles from '../cssFiles/AllArticles.module.css'
-import Button from 'react-bootstrap/Button'
+
 
 
 class Topics extends Component {
@@ -45,40 +46,52 @@ class Topics extends Component {
             return <ErrorPage status={hasError.status} msg={hasError.msg} />
         }
         return (
-            <div>
 
-                <ul className={styles.AllArticles}>
-                    {topics.map(topic => {
-                        return (
-                            <li className={styles.Articles} key={topic.slug}>
-                                <h3>{topic.slug}</h3>
 
-                                <p>
-                                    {topic.description}
+            <Container>
+                <Row>
 
-                                </p>
-                                <> <Button variant="success" value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</Button>{' '} </>
-                                <br></br><br></br>
-                            </li>
-                        )
-                    })
-                    }
-                </ul>
-                <br></br> <br></br>
-                <ul className={styles.AllArticles}>
-                    {articles.map(article => {
-                        return (
-                            <li className={styles.Articles} key={article.article_id}>
-                                <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
-                                Author: {article.author} <br></br><br></br>
+                    <Card style={{ width: '40rem' }} >
 
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div >
+                        {topics.map(topic => {
+                            return (
+                                <Col>
+                                    <Card.Body className={styles.TopicArticles}>
+                                        <ListGroup key={topic.slug}>
+                                            <Card.Title>{topic.slug}</Card.Title>
+
+                                            <Card.Text>
+                                                {topic.description}
+
+                                            </Card.Text>
+                                            <> <Button variant="success" value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</Button>{' '} </>
+                                            <br></br><br></br>
+                                        </ListGroup>
+                                    </Card.Body>
+                                </Col>
+                            )
+                        })
+                        }
+
+
+                        {articles.map(article => {
+                            return (
+                                <ListGroup key={article.article_id} >
+                                    <Link to={`/articles/${article.article_id}`}> <Card.Title>{article.title}</Card.Title></Link>
+                                    <Card.Text>  Author: {article.author}   </Card.Text><br></br><br></br>
+
+                                </ListGroup>
+                            )
+                        })}
+                    </Card>
+
+                </Row>
+            </Container>
+
         );
     }
 }
 
 export default Topics;
+
+

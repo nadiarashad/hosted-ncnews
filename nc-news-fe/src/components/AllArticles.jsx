@@ -70,8 +70,7 @@ class AllArticles extends Component {
 
         return (
             <div >
-                <br>
-                </br>
+
                 <h2>All articles</h2>
                 <SortArticles handleSort={this.handleSort} handleOrder={this.handleOrder} filterArticles={this.filterArticles} clearFilters={this.clearFilters} users={users} />
 

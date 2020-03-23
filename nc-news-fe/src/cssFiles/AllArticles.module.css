@@ -28,3 +28,27 @@
 
 }
 
+
+.AllTopicArticles {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+    
+}
+.TopicArticles {
+     list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    justify-content: space-around;
+   width: 40rem;
+    margin-left: 1em;
+    margin-right: 1em ;
+    margin-bottom: 1em;
+    display: grid;
+    grid-template: 3fr 1fr;
+    grid-template-areas:  3fr 1fr; 
+}
+
