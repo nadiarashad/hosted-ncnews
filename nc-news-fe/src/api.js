@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { Body } from 'react-bootstrap/lib/Media';
+
 
 
 const BaseURL = 'https://nc-news-heroku.herokuapp.com/api/'
@@ -47,7 +47,13 @@ export const fetchAllComments = () => {
 
 // }
 
-export const postComment = (article_id, loggedInUser, body)
+export const postComment = (loggedInUser, body, article_id) => {
+    console.log(loggedInUser, body, article_id, 'in api section')
+    return Axios.post(
+        `https://nc-news-heroku.herokuapp.com/api/articles/${article_id}/comments`, { username: loggedInUser, body: body }
+    )
+
+}
 
 export const fetchCommentsPerID = (article_id) => {
 

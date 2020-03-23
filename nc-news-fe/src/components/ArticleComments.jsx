@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Axios from 'axios'
 import CommentForm from './CommentForm';
-import moment from 'moment';
 import * as api from '../api';
 import ErrorPage from './ErrorPage'
-import Button from 'react-bootstrap/Button'
+import SingleComment from './SingleComment'
 
 class ArticleComments extends Component {
 
@@ -28,7 +26,6 @@ class ArticleComments extends Component {
             })
     }
 
-
     handleVoteUpdates = (num) => {
         api.handleCommentVoteUpdates(this.props.article_id, num)
             .then(res => {
@@ -41,7 +38,6 @@ class ArticleComments extends Component {
                 this.setState({ voteError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
             })
     }
-
 
     handleDelete = (comment_id) => {
 
@@ -59,11 +55,9 @@ class ArticleComments extends Component {
     }
 
     postComment = (loggedInUser, body) => {
+        const { article_id } = this.props
 
-        return Axios.post(
-            `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
-            { username: loggedInUser, body: body })
-
+        api.postComment(loggedInUser, body, article_id)
             .then(res => {
                 this.setState(currentState => {
                     return { comments: [res.data.comment, ...currentState.comments] };
@@ -88,41 +82,11 @@ class ArticleComments extends Component {
         }
         return (
             <div>
-
                 {loggedInUser && (
                     < CommentForm postComment={this.postComment} loggedInUser={this.props.loggedInUser} />
                 )}
-
                 <br></br>
-
-                <h3>All comments are below..</h3>
-
-                <ul>
-                    {comments.map(comment => {
-                        return (
-                            <li key={comment.comment_id}> <br></br>
-
-                                <p> Comment by: {comment.author}<br></br>
-                                    {comment.body}<br></br>
-                                    ID: {comment.comment_id}<br></br>
-                                    Commented at: {moment(comment.created_at).format('MMMM Do YYYY, h:mm a')}<br></br><br></br>
-
-                                    Current votes: {comment.votes + voteChange}<br></br><br></br>
-                                    Let us know what you thought of the comment by clicking on the buttons below...<br></br><br></br>
-
-                                    {voteError !== false && <p>Error. can not vote</p>}
-                                    <>
-                                        <Button variant='success' disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(1)}>{'😀'}</Button>{' '}</>  <><Button variant='danger' disabled={voteChange !== 0} className="vote-button" onClick={() => this.handleVoteUpdates(-1)}>{'😞'}</Button>{' '}</>
-                                    <br></br><br></br>
-
-                                    {loggedInUser &&
-                                        <button onClick={() => this.handleDelete(comment.comment_id)} > Delete comment</button>
-                                    }
-                                </p>
-                            </li>
-                        )
-                    })}
-                </ul>
+                <SingleComment comments={comments} voteError={voteError} voteChange={voteChange} handleVoteUpdates={this.handleVoteUpdates} handleDelete={this.handleDelete} />
             </div >
         );
     }
