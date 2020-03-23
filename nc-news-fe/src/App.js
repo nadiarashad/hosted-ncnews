@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/header'
 import Home from './components/Home'
 import { Router } from '@reach/router';
-import Nav from './components/nav';
+import PageNav from './components/nav';
 import AllArticles from './components/AllArticles'
 import Article from './components/Article'
 import Topics from './components/Topics'
@@ -62,7 +62,7 @@ class App extends Component {
 
 
         <Header loggedInUser={loggedInUser} logInUser={this.logInUser} validUser={this.validUser} />
-        <Nav />
+        <PageNav />
         <br></br>
         <br></br>
         <br></br>

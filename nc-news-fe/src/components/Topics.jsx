@@ -3,6 +3,7 @@ import { Link } from '@reach/router';
 import * as api from '../api';
 import ErrorPage from './ErrorPage'
 import styles from '../cssFiles/AllArticles.module.css'
+import Button from 'react-bootstrap/Button'
 
 
 class Topics extends Component {
@@ -56,7 +57,7 @@ class Topics extends Component {
                                     {topic.description}
 
                                 </p>
-                                <button value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</button>
+                                <> <Button variant="success" value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</Button>{' '} </>
                                 <br></br><br></br>
                             </li>
                         )
