@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import * as api from '../api';
 import ErrorPage from './ErrorPage'
-import { Button, Card, ListGroup, Container, Row, Col } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import styles from '../cssFiles/AllArticles.module.css'
+import NC from '../images/nc.png'
 
 
 
@@ -47,46 +48,43 @@ class Topics extends Component {
         }
         return (
 
+            <div>
 
-            <Container>
-                <Row>
-
-                    <Card style={{ width: '40rem' }} >
-
-                        {topics.map(topic => {
-                            return (
-                                <Col>
-                                    <Card.Body className={styles.TopicArticles}>
-                                        <ListGroup key={topic.slug}>
-                                            <Card.Title>{topic.slug}</Card.Title>
-
-                                            <Card.Text>
-                                                {topic.description}
-
-                                            </Card.Text>
-                                            <> <Button variant="success" value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</Button>{' '} </>
-                                            <br></br><br></br>
-                                        </ListGroup>
-                                    </Card.Body>
-                                </Col>
-                            )
-                        })
-                        }
+                <ul className={styles.AllArticles}>
+                    {topics.map(topic => {
+                        return (
+                            <li border="primary" className={styles.Articles} key={topic.slug}>
+                                <h3>{topic.slug}</h3>
 
 
-                        {articles.map(article => {
-                            return (
-                                <ListGroup key={article.article_id} >
-                                    <Link to={`/articles/${article.article_id}`}> <Card.Title>{article.title}</Card.Title></Link>
-                                    <Card.Text>  Author: {article.author}   </Card.Text><br></br><br></br>
+                                <p>
+                                    {topic.description}
 
-                                </ListGroup>
-                            )
-                        })}
-                    </Card>
+                                </p>
+                                <> <Button variant="success" value={topic.slug} onClick={e => this.handleClick(e.target.value)}>View all related articles below</Button>{' '} </>
+                                <br></br>
+                                <img src={NC} alt="banner" className="topicsImage" />
+                                <br></br><br></br>
+                            </li>
+                        )
+                    })
+                    }
+                </ul>
+                <br></br> <br></br>
+                <ul className={styles.AllArticles}>
+                    {articles.map(article => {
+                        return (
+                            <li className={styles.Articles} key={article.article_id}>
+                                <Link to={`/articles/${article.article_id}`}><h3>{article.title}</h3></Link>
+                                Author: {article.author} <br></br><br></br>
 
-                </Row>
-            </Container>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div >
+
+
 
         );
     }

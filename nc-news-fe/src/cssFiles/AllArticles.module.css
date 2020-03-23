@@ -11,19 +11,21 @@
     width: 23em;
     margin-left: 1em;
     margin-right: 1em ;
+    margin-top: 2em;
     border: solid grey;
-    border-width: 0.2em;
+    border-width: 0.1em;
     margin-bottom: 1em;
     display: grid;
     grid-template: 3fr 1fr;
     grid-template-areas:  3fr 1fr;
+
 }
 
 .ArticleUL {
   list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    padding: 0;
+    padding: 1em;
     justify-content: space-around;
 
 }
@@ -35,6 +37,7 @@
     flex-wrap: wrap;
     padding: 0;
     justify-content: space-around;
+ 
     
 }
 .TopicArticles {
@@ -52,3 +55,6 @@
     grid-template-areas:  3fr 1fr; 
 }
 
+.SingleArticle {
+
+}

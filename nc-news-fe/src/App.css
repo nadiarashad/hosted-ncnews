@@ -85,3 +85,14 @@ headerbanner {
 
 
 }
+
+.HeaderBackground {
+   background: url("./images/PaintSwatches_1920x1234.png");
+    background-size:contain;
+    background-position:top;
+    background: cover;
+}
+
+.topicsImage {
+   width: 22rem;
+}
