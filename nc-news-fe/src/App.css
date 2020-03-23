@@ -6,7 +6,9 @@
 /* font-family: 'Baloo Chettan 2', cursive;
 font-family: 'Baloo Chettan 2', cursive;
 font-family: 'Bellota Text', cursive; */
-font-family: 'Permanent Marker', cursive
+/* font-family: 'Permanent Marker', cursive */
+/* font-family: 'Chonburi', cursive; */
+font-family: 'Quando', serif;
 }
 
 /* #282c34 */
@@ -74,7 +76,6 @@ h3 {
 
 p { 
 text-align: center;
-font-family: 'Permanent Marker', cursive;
    color: darkslategrey;
    text-decoration: none;
 
