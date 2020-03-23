@@ -12,6 +12,7 @@ class LogInForm extends Component {
     }
 
     handleSubmit = (event) => {
+        console.log('in handle submit')
         const { logInUser } = this.props
         const { username } = this.state
 
@@ -48,9 +49,10 @@ class LogInForm extends Component {
                                 <input
                                     type="text"
                                     value={this.state.username}
+
                                     onChange={event => { this.handleInput('username', event.target.value) }}
                                 />
-                                <Button variant='dark' >Log in</Button>{' '}
+                                <button variant='dark' >Log in</button>
                             </label>
                         </form>
                     </div>

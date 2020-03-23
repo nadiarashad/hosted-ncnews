@@ -9,7 +9,7 @@ font-family: 'Bellota Text', cursive; */
 /* font-family: 'Permanent Marker', cursive */
 /* font-family: 'Chonburi', cursive; */
 font-family: 'Quando', serif;
- background: url("./images/PaintSwatches_1920x1234.png");
+ background: url("./images/marble-surface-wall-white-1323712.jpg");
     background-size: cover;
     background-position:top;
     background: cover;
@@ -84,7 +84,7 @@ h3 {
 
 p { 
 text-align: center;
-   color: darkslategrey;
+   color:black;
    text-decoration: none;
 
 }
@@ -95,8 +95,8 @@ headerbanner {
 }
 
 .HeaderBackground {
-   background: url("./images/PaintSwatches_1920x1234.png");
-    background-size:contain;
+   background: url("./images/marble-surface-wall-white-1323712.jpg");
+    background-size:cover;
     background-position:top;
     background: cover;
       text-align: center;

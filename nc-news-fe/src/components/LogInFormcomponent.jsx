@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button'
 
 const LogInFormcomponent = (props) => {
-    console.log(props.handleInput)
+    console.log(props, 'handleInput')
     return (
         <div>
             <form onSubmit={props.handleSubmit()}>

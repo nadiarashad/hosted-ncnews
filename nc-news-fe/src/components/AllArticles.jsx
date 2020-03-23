@@ -52,7 +52,13 @@ class AllArticles extends Component {
     }
 
     clearFilters = () => {
-        this.componentDidMount()
+        api.fetchAllArticles().then(res => {
+
+            this.setState({ articles: res.data.articles, isLoading: false });
+        }).catch((err) => {
+
+            this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
+        })
     }
 
 

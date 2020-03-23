@@ -10,7 +10,7 @@ import Topics from './components/Topics'
 import AllComments from './components/AllComments'
 import ErrorPage from './components/ErrorPage'
 import Axios from 'axios';
-import * as api from './api';
+// import * as api from './api';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -21,7 +21,7 @@ class App extends Component {
     users: [],
     validUser: false,
     isLoggedIn: false,
-    articles: []
+    // articles: []
   }
 
   fetchUsers = () => {
@@ -33,29 +33,18 @@ class App extends Component {
       .then(res => {
         this.setState({ users: res.data.users.map(user => user.username) });
       });
-
-    api.fetchAllArticles().then(res => {
-      this.setState({ articles: res.data.articles, isLoading: false });
-    }).catch((err) => {
-      console.dir(err, 'all articles err')
-      this.setState({ hasError: { msg: err.response.data.msg, status: err.response.data.status }, isLoading: false })
-    })
   }
 
 
   logInUser = (username) => {
-
-
     if (this.state.users.includes(username)) {
-
       this.setState({ loggedInUser: username, validUser: true, isLoggedIn: true })
     }
-
   }
 
 
-
   render() {
+    console.log(this.state)
     const { loggedInUser, users } = this.state
     return (
       <div className="App" >
@@ -71,7 +60,7 @@ class App extends Component {
           <Home path="/" />
           <AllArticles path="/articles/*" users={users} />
           <Article path="/articles/:article_id/*" loggedInUser={this.state.loggedInUser} isLoggedIn={this.state.isLoggedIn} articles={this.state.articles} />
-          <Topics path="/topics/" articles={this.state.articles} />
+          <Topics path="/topics/" />
           <AllComments path="/comments" />
           <ErrorPage default status={404} msg={'Page not found'} />
 

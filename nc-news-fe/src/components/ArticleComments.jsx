@@ -58,13 +58,11 @@ class ArticleComments extends Component {
             })
     }
 
-    postComment = newComment => {
-
-        const { username, body } = newComment
+    postComment = (loggedInUser, body) => {
 
         return Axios.post(
             `https://nc-news-heroku.herokuapp.com/api/articles/${this.props.article_id}/comments`,
-            { username, body })
+            { username: loggedInUser, body: body })
 
             .then(res => {
                 this.setState(currentState => {
