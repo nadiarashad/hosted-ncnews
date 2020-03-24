@@ -7,6 +7,8 @@ This is NC-News Frontend, a React app for a reddit style news site and discussio
 
 The Backend for this project can be found at https://github.com/nadiarashad/nc_news_new
 
+The deployed version of the site can be found at  https://5e79efb700351734bb918f5f--nadias-nc-news.netlify.com
+
 Getting Started The hosted application can be found at https://nadias-nc-news.netlify.com/
 
 Forking the repository
