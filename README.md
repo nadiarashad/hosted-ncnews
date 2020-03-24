@@ -23,9 +23,9 @@ cd into the repository
 
 The following dependancies will need to be installed using the Node Package Manager (npm i or npm install)
 
-npm i @reach/router minimum version required
+npm i @reach/router
 
-npm i axios minimum version required
+npm i axios 
 
 npm i bootstrap minimum version required "bootstrap": "^4.4.1"
 
