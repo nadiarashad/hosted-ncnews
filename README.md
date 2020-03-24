@@ -9,7 +9,9 @@ The Backend for this project can be found at https://github.com/nadiarashad/nc_n
 
 The deployed version of the site can be found at  https://5e79efb700351734bb918f5f--nadias-nc-news.netlify.com
 
-Getting Started The hosted application can be found at https://nadias-nc-news.netlify.com/
+The hosted application can be found at https://nadias-nc-news.netlify.com/
+
+Getting Started 
 
 Forking the repository
 
